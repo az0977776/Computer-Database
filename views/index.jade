@@ -1,5 +1,19 @@
 extends layout
 
 block content
+  nav
+    div.nav-wrapper
+      a(href="#" class="brand-logo") &nbsp;&nbsp;#{title}
+      ul.right
+        li
+          a(href="#") Computers
+        li
+          a(href="#") Issues
+        li
+          a(href="#") Login
+
   h1= title
   p Welcome to #{title}
+
+
+
