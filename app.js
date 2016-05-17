@@ -13,7 +13,7 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
 var issues = require('./routes/issues');
-var computers = require('./routes/issues');
+var computers = require('./routes/computers');
 
 var app = express();
 
