@@ -35,23 +35,65 @@ connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
             + 'PRIMARY KEY (computerID)'
             +  ')', function (err) {
                 if (err) throw err;
-                console.log('created table');
             });
     });
 });
 
+
+//functions to add
+//add comp, delete comp, update comp, get all comp?, get all comps in a room, get comp with issuelevel
+
+
 //Adds computer to table. computerID is unique
 var addComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
-  connection.query('INSERT INTO comps SET ?', {room:room, computerID:computerID, xcor:xcor, ycor:ycor, type:type, OS:OS, installation:installation, updated:updated, working:working, issueLevel:issueLevel, description:description}, function(err, res){
+  connection.query('INSERT INTO comps SET ?', {room:room, computerID:computerID, xcor:xcor, ycor:ycor, type:type, OS:OS, installation:installation, updated:updated, working:working, issueLevel:issueLevel, description:description}, function(err){
     if (err) throw err;
+    console.log('Added computer');
+  });
+};
+
+//addComp(333,55,1,2,"lenovo","linux","2012-01-15","2013-02-16","Y",0,"monitor is broken");
+
+//Delete computer by ID
+var deleteComp = function(computerID){
+  connection.query('DELETE FROM comps WHERE computerID = ?', [computerID], function (err, res){
+    if (err) throw err;
+    console.log('Deleted ' + res.affectedRows + ' rows');
+  });
+};
+
+//deleteComp(12);
+
+//Gets all computers
+var getAllComp = function(){
+  connection.query('SELECT * FROM comps', function(err,res){
+    if (err) throw err;
+    console.log('Data of all computers:\n');
+    console.log(res)
+  });
+};
+
+getAllComp();
+
+var getAllCompInRoom = function(room){
+  connection.query('SELECT * FROM comps WHERE room = ?', [room], function(err, res){
+    if (err) throw err;
+    console.log('Data for all computers in room ' + room + '\n');
     console.log(res);
   });
 };
 
-//addComp(321,12,1,2,"lenovo","linux","2012-01-15","2013-02-16","Y",2,"monitor is broken");
+getAllCompInRoom(321);
 
-//add comp, delete comp, update comp, get all comp?, get all comps in a room, get all broken comp, get comp with issuelevel, 
+var getIssues = function(issueLevel){
+  connection.query('SELECT * FROM comps WHERE issueLevel = ?', [issueLevel], function(err, res){
+    if (err) throw err;
+    console.log('Data for all computers with issue level ' + issueLevel + '\n');
+    console.log(res);
+  });
+};
 
+getIssues(2);
 
 // connection.query(
 //   'UPDATE comps SET name = ? Where ID = ?',
@@ -62,20 +104,3 @@ var addComp = function(room, computerID, xcor, ycor, type, OS, installation, upd
 //     console.log('Changed ' + result.changedRows + ' rows');
 //   }
 // );
-
-// connection.query(
-//   'DELETE FROM comps WHERE working = ?',
-//   ["Y"],
-//   function (err, result) {
-//     if (err) throw err;
-
-//     console.log('Deleted ' + result.affectedRows + ' rows');
-//   }
-// );
-
-connection.query('SELECT * FROM comps',function(err,rows){
-  if(err) throw err;
-
-  console.log('Data received from Db:\n');
-  console.log(rows);
-});
