@@ -1,0 +1,8 @@
+#!/bin/bash
+
+STRING = "hanzhangfrankl.wang@149.89.150.==="
+
+for i in {0..32}
+do
+    ${STRING/===/
+done
