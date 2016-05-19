@@ -3,3 +3,6 @@ extends layout
 block content
   div.container
     h1 Issues
+    - each issue in issues
+      div.container
+        p Name: #{issue.name} Description: #{issue.description} Level: #{issue.level}

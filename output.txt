@@ -1,0 +1,6 @@
+CPU Name: 
+Young-Macbook
+CPU Info: 
+Version: 
+=====
+
