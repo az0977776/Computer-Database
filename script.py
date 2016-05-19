@@ -10,7 +10,7 @@ skippedHosts = ""
 
 
 
-for i in range(33):
+for i in range(6):
     host = "149.89.150." + str(100+i)
     print host
     
@@ -45,9 +45,11 @@ for i in range(33):
     version = stdout.read()
     
     ssh.close()
-    CPUlist += host + "\n" + cpu + "\n" + version +"\n|||||"
+    CPUlist += host + "\n" + cpu + "\n" + version +"\n|||||\n"
     
 print CPUlist
 
-f.write(CPUlist)
+content = CPUlist+"\n"+"===================="+"\n"+skippedHosts
+
+f.write(content)
 f.close()

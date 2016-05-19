@@ -64,6 +64,15 @@ var deleteComp = function(computerID){
 
 //deleteComp(12);
 
+//updates computer data
+var updateComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
+  connection.query('UPDATE comps SET room = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
+    if (err) throw err;
+    console.log('Updated computer ' + computerID);
+  });
+};
+
+//updateComp(45555,55,122,2555,"lo","lux","2012-01-28","2013-12-16","N",2," poop on it");
 
 //Gets all computers
 var getAllComp = function(){
@@ -98,11 +107,4 @@ var getIssues = function(issueLevel){
 
 //getIssues(2);
 
-var updateComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
-  connection.query('UPDATE comps SET room = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
-    if (err) throw err;
-    console.log('Updated computer ' + computerID);
-  });
-};
 
-updateComp(45555,55,122,2555,"lo","lux","2012-01-28","2013-12-16","N",2," poop on it");
