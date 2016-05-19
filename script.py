@@ -6,6 +6,9 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 CPUlist = ""
+skippedHosts = ""
+
+
 
 for i in range(33):
     host = "149.89.150." + str(100+i)
@@ -14,13 +17,21 @@ for i in range(33):
     for attempt in range(30):
         try:
             ssh.connect(host, port = 22, username="hanzhangfrankl.wang", password="dragons123")
+            timeRun = time.time()
         except EnvironmentError as exc:
             if exc.errno == errno.ECONNREFUSED:
+                skippedHosts += host + "\n"
                 i+=1
                 host = "149.89.150." + str(100+i)
                 print i
+            elif exc.errno == errno.ETIMEDOUT:
+                skippedHosts += host + "\n"
+                i+=1
+                host = "149.89.150." + str(100+i)
+                print i
+                ssh.close()
             else:
-                raise
+                 raise
         else:
             break
     else:
@@ -30,12 +41,11 @@ for i in range(33):
     
     cpu = stdout.read()
     
-    ssh.exec_command("cd /proc")
-    stdin, stdout, stderr = ssh.exec_command("cat version")
+    stdin, stdout, stderr = ssh.exec_command("cat /proc/version")
     version = stdout.read()
     
     ssh.close()
-    CPUlist += cpu + "\n" + version +"\n"
+    CPUlist += host + "\n" + cpu + "\n" + version +"\n|||||"
     
 print CPUlist
 

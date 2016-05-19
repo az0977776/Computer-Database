@@ -12,7 +12,7 @@ var Room = function() {
 
 var Computer = function() {
     
-    var alertColors//list of possible colors
+    var alertColors;//list of possible colors
     var xcor,ycor,height,width,alertColor,alert;
     
     alertColors = ["009900","e6b800","cc0000"];//green,yellow,red
@@ -47,3 +47,7 @@ var Alert = function(){
     var xcor,ycor,height,width,alertColor,description;
     
 }
+
+var populateRoom = function(){
+  //goes through database and create a room object with computers  
+};

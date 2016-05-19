@@ -64,6 +64,7 @@ var deleteComp = function(computerID){
 
 //deleteComp(12);
 
+
 //Gets all computers
 var getAllComp = function(){
   connection.query('SELECT * FROM comps', function(err,res){
@@ -75,6 +76,7 @@ var getAllComp = function(){
 
 getAllComp();
 
+//Gets all computers in a room
 var getAllCompInRoom = function(room){
   connection.query('SELECT * FROM comps WHERE room = ?', [room], function(err, res){
     if (err) throw err;
@@ -83,8 +85,9 @@ var getAllCompInRoom = function(room){
   });
 };
 
-getAllCompInRoom(321);
+//getAllCompInRoom(321);
 
+//Gets all computers with specified issue level
 var getIssues = function(issueLevel){
   connection.query('SELECT * FROM comps WHERE issueLevel = ?', [issueLevel], function(err, res){
     if (err) throw err;
@@ -93,14 +96,13 @@ var getIssues = function(issueLevel){
   });
 };
 
-getIssues(2);
+//getIssues(2);
 
-// connection.query(
-//   'UPDATE comps SET name = ? Where ID = ?',
-//   ["darwin", 1],
-//   function (err, result) {
-//     if (err) throw err;
+var updateComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
+  connection.query('UPDATE comps SET room = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
+    if (err) throw err;
+    console.log('Updated computer ' + computerID);
+  });
+};
 
-//     console.log('Changed ' + result.changedRows + ' rows');
-//   }
-// );
+updateComp(45555,55,122,2555,"lo","lux","2012-01-28","2013-12-16","N",2," poop on it");
