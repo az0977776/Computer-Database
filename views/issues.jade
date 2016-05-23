@@ -1,8 +1,37 @@
 extends layout
 
+block variables
+  var route = #{route}
+  
 block content
   div.container
     h1 Issues
-    - each issue in issues
-      div.container
-        p Name: #{issue.name} Description: #{issue.description} Level: #{issue.level}
+    ul.collection.with-header
+      - each issue in issues
+        li.collection-item.avatar.indigo.lighten-5
+          - var level = parseInt(issue.level) + 1;
+          case level
+            when 1
+              i.material-icons.circle.green
+            when 2
+              i.material-icons.circle.yellow
+            default
+              i.material-icons.circle.red
+          span.title 
+            b #{issue.name}
+          p Description: #{issue.description}
+          p Severity: #{level}
+          a(href="#").secondary-content
+            i.material-icons close
+  //- div.container
+  //-   h1 Issues
+  //-   - each issue in issues
+  //-     div.card-panel.indigo.lighten-4.z-depth-1
+  //-       span 
+  //-         b 
+  //-           big #{issue.name} 
+  //-         i.material-icons.right close
+  //-       div.container
+  //-         p Description: #{issue.description} 
+  //-         p Level: #{issue.level}
+        
