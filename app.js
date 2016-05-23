@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var url = require('url');
 
 // generated pages
 var routes = require('./routes/index');
@@ -14,6 +15,7 @@ var login = require('./routes/login');
 var signup = require('./routes/signup');
 var issues = require('./routes/issues');
 var computers = require('./routes/computers');
+var room = require('./routes/room');
 
 var app = express();
 
@@ -33,11 +35,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // generated
 app.use('/', routes);
 app.use('/users', users);
-
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/issues', issues);
 app.use('/computers', computers);
+app.use('/room', room);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

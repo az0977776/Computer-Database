@@ -10,14 +10,14 @@ skippedHosts = ""
 
 
 
-for i in range(6):
+for i in range(33):
     host = "149.89.150." + str(100+i)
     print host
     
     for attempt in range(30):
         try:
             ssh.connect(host, port = 22, username="hanzhangfrankl.wang", password="dragons123")
-            timeRun = time.time()
+            timeRun = time.time()   
         except EnvironmentError as exc:
             if exc.errno == errno.ECONNREFUSED:
                 skippedHosts += host + "\n"

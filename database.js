@@ -36,6 +36,13 @@ connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
             +  ')', function (err) {
                 if (err) throw err;
             });
+        connection.query('CREATE TABLE IF NOT EXISTS users('
+            + 'username VARCHAR(15),'
+            + 'password VARCHAR(15),'
+            + 'PRIMARY KEY (username)'
+            + ')', function(err) {
+                if (err) throw err;
+            });
     });
 });
 
@@ -79,11 +86,11 @@ var getAllComp = function(){
   connection.query('SELECT * FROM comps', function(err,res){
     if (err) throw err;
     console.log('Data of all computers:\n');
-    console.log(res)
+    console.log(res);
   });
 };
 
-getAllComp();
+//getAllComp();
 
 //Gets all computers in a room
 var getAllCompInRoom = function(room){
@@ -108,3 +115,35 @@ var getIssues = function(issueLevel){
 //getIssues(2);
 
 
+//user database
+var addUser = function(user,pass){
+  connection.query('INSERT INTO users SET ?', {username:user, password:pass}, function(err){
+    if (err) throw err;
+    console.log('Added user ' + user);
+  });
+};
+
+//testing purposes
+var getAllUsers = function(){
+  connection.query('SELECT * FROM users', function(err,res){
+    if (err) throw err;
+    console.log(res);
+  });
+};
+
+var authenticate = function(user,pass){
+  connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [user,pass], function(err,res){
+    if (err) throw err;
+    console.log(res[0]);
+    if (res[0] == undefined){
+      console.log('false');
+      return false;
+    } else{
+      console.log('true');
+      return true;
+    };
+  });
+};
+//addUser('darwin','darwinchiu');
+authenticate('dain','darwiu');
+getAllUsers();

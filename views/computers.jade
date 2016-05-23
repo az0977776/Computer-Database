@@ -1,45 +1,21 @@
 extends layout
 
 block content
-  | <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  | <script>
-  | $(document).ready(function(){
-  |   $("#hide304").click(function(){
-  |      $(".304").toggle();
-  |  });
-  | });
-  | $(document).ready(function(){
-  |   $("#hide312").click(function(){
-  |      $(".312").toggle();
-  |  });
-  | });
-  | $(document).ready(function(){
-  |   $("#hide327").click(function(){
-  |      $(".327").toggle();
-  |  });
-  | });
-  | $(document).ready(function(){
-  |   $("#hide333").click(function(){
-  |      $(".333").toggle(function());
-  |  });
-  | });
-  | </script>
   div.container
     h1 Computers
-    p choose a room
-    h2 ROOM 304
-    button.waves-effect.waves-light.btn#hide304 Hide
-    div.304 hello this is div 304
+    a(href='/room/304')
+      button.waves-effect.waves-light.btn Room 304
     br
-    h2 ROOM 312
-    button.waves-effect.waves-light.btn#hide312 Hide
-    div.312 hello this is div 312
     br
-    h2 ROOM 327
-    button.waves-effect.waves-light.btn#hide327 Hide
-    div.327 hello this is div 327
+    a(href='/room/312')
+      button.waves-effect.waves-light.btn Room 312
     br
-    h2 ROOM 333
-    button.waves-effect.waves-light.btn#hide333 Hide
-    div.333 hello this is div 333
+    br
+    a(href='/room/327')
+      button.waves-effect.waves-light.btn Room 327
+    br
+    br
+    a(href='/room/333')
+      button.waves-effect.waves-light.btn Room 333
+
         
