@@ -6,52 +6,53 @@ var connection = mysql.createConnection({
   database : 'labs'
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
-});
-
-//Creates database and table if not already made
-connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
-    if (err) throw err;
-    console.log('created db');
-    connection.query('USE labs', function (err) {
-        if (err) throw err;
-        connection.query('CREATE TABLE IF NOT EXISTS comps('
-            + 'room INT NOT NULL,'
-            + 'computerID INT NOT NULL,'
-            + 'xcor INT NOT NULL,'
-            + 'ycor INT NOT NULL,'
-            + 'type VARCHAR(25),'
-            + 'OS VARCHAR(25),'
-            + 'installation DATE,'
-            + 'updated DATE,'
-            + 'working CHAR(1),'
-            + 'issueLevel INT,'
-            + 'description VARCHAR(100),'
-            + 'PRIMARY KEY (computerID)'
-            +  ')', function (err) {
-                if (err) throw err;
-            });
-        connection.query('CREATE TABLE IF NOT EXISTS users('
-            + 'username VARCHAR(15),'
-            + 'password VARCHAR(15),'
-            + 'PRIMARY KEY (username)'
-            + ')', function(err) {
-                if (err) throw err;
-            });
-    });
-});
-
-
 //functions to add
 //add comp, delete comp, update comp, get all comp?, get all comps in a room, get comp with issuelevel
 
+// Initialize connection for use
+var init = function() {
+  connection.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+    console.log('connected as id ' + connection.threadId);
+  });
+  
+  //Creates database and table if not already made
+  connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
+      if (err) throw err;
+      console.log('created db');
+      connection.query('USE labs', function (err) {
+          if (err) throw err;
+          connection.query('CREATE TABLE IF NOT EXISTS comps('
+              + 'room INT NOT NULL,'
+              + 'computerID INT NOT NULL,'
+              + 'xcor INT NOT NULL,'
+              + 'ycor INT NOT NULL,'
+              + 'type VARCHAR(25),'
+              + 'OS VARCHAR(25),'
+              + 'installation DATE,'
+              + 'updated DATE,'
+              + 'working CHAR(1),'
+              + 'issueLevel INT,'
+              + 'description VARCHAR(100),'
+              + 'PRIMARY KEY (computerID)'
+              +  ')', function (err) {
+                  if (err) throw err;
+              });
+          connection.query('CREATE TABLE IF NOT EXISTS users('
+              + 'username VARCHAR(15),'
+              + 'password VARCHAR(15),'
+              + 'PRIMARY KEY (username)'
+              + ')', function(err) {
+                  if (err) throw err;
+              });
+      });
+  });
+}
 
-//Adds computer to table. computerID is unique
+// Adds computer to table. computerID is unique
 var addComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
   connection.query('INSERT INTO comps SET ?', {room:room, computerID:computerID, xcor:xcor, ycor:ycor, type:type, OS:OS, installation:installation, updated:updated, working:working, issueLevel:issueLevel, description:description}, function(err){
     if (err) throw err;
@@ -59,9 +60,9 @@ var addComp = function(room, computerID, xcor, ycor, type, OS, installation, upd
   });
 };
 
-//addComp(333,55,1,2,"lenovo","linux","2012-01-15","2013-02-16","Y",0,"monitor is broken");
+// addComp(333,55,1,2,"lenovo","linux","2012-01-15","2013-02-16","Y",0,"monitor is broken");
 
-//Delete computer by ID
+// Delete computer by ID
 var deleteComp = function(computerID){
   connection.query('DELETE FROM comps WHERE computerID = ?', [computerID], function (err, res){
     if (err) throw err;
@@ -69,9 +70,9 @@ var deleteComp = function(computerID){
   });
 };
 
-//deleteComp(12);
+// deleteComp(12);
 
-//updates computer data
+// Updates computer data
 var updateComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
   connection.query('UPDATE comps SET room = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
     if (err) throw err;
@@ -79,9 +80,9 @@ var updateComp = function(room, computerID, xcor, ycor, type, OS, installation, 
   });
 };
 
-//updateComp(45555,55,122,2555,"lo","lux","2012-01-28","2013-12-16","N",2," poop on it");
+// UpdateComp(45555,55,122,2555,"lo","lux","2012-01-28","2013-12-16","N",2," poop on it");
 
-//Gets all computers
+// Gets all computers
 var getAllComp = function(){
   connection.query('SELECT * FROM comps', function(err,res){
     if (err) throw err;
@@ -101,9 +102,9 @@ var getAllCompInRoom = function(room){
   });
 };
 
-//getAllCompInRoom(321);
+// getAllCompInRoom(321);
 
-//Gets all computers with specified issue level
+// Gets all computers with specified issue level
 var getIssues = function(issueLevel){
   connection.query('SELECT * FROM comps WHERE issueLevel = ?', [issueLevel], function(err, res){
     if (err) throw err;
@@ -112,10 +113,10 @@ var getIssues = function(issueLevel){
   });
 };
 
-//getIssues(2);
+// getIssues(2);
 
 
-//user database
+// User database
 var addUser = function(user,pass){
   connection.query('INSERT INTO users SET ?', {username:user, password:pass}, function(err){
     if (err) throw err;
@@ -123,7 +124,7 @@ var addUser = function(user,pass){
   });
 };
 
-//testing purposes
+// Testing purposes
 var getAllUsers = function(){
   connection.query('SELECT * FROM users', function(err,res){
     if (err) throw err;
@@ -144,6 +145,8 @@ var authenticate = function(user,pass){
     };
   });
 };
+
+init();
 //addUser('darwin','darwinchiu');
 authenticate('dain','darwiu');
 getAllUsers();
