@@ -26,17 +26,18 @@ var init = function() {
       connection.query('USE labs', function (err) {
           if (err) throw err;
           connection.query('CREATE TABLE IF NOT EXISTS comps('
-              + 'room INT NOT NULL,'
-              + 'computerID INT NOT NULL,'
-              + 'xcor INT NOT NULL,'
-              + 'ycor INT NOT NULL,'
+              + 'room INT,'
+              + 'computerID INT,'
+              + 'ip VARCHAR(20),'
+              + 'xcor INT,'
+              + 'ycor INT,'
               + 'type VARCHAR(25),'
               + 'OS VARCHAR(25),'
               + 'installation DATE,'
               + 'updated DATE,'
               + 'working CHAR(1),'
               + 'issueLevel INT,'
-              + 'description VARCHAR(100),'
+              + 'description VARCHAR(10000),'
               + 'PRIMARY KEY (computerID)'
               +  ')', function (err) {
                   if (err) throw err;
@@ -48,13 +49,19 @@ var init = function() {
               + ')', function(err) {
                   if (err) throw err;
               });
+          connection.query('CREATE TABLE IF NOT EXISTS classrooms('
+              + 'roomNumber INT,'
+              + 'notes VARCHAR(10000),' 
+              + ')', function (err) {
+                if (err) throw err;
+              });
       });
   });
 }
 
 // Adds computer to table. computerID is unique
-var addComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
-  connection.query('INSERT INTO comps SET ?', {room:room, computerID:computerID, xcor:xcor, ycor:ycor, type:type, OS:OS, installation:installation, updated:updated, working:working, issueLevel:issueLevel, description:description}, function(err){
+var addComp = function(room, computerID, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
+  connection.query('INSERT INTO comps SET ?', {room:room, computerID:computerID, ip:ip, xcor:xcor, ycor:ycor, type:type, OS:OS, installation:installation, updated:updated, working:working, issueLevel:issueLevel, description:description}, function(err){
     if (err) throw err;
     console.log('Added computer');
   });
@@ -73,8 +80,8 @@ var deleteComp = function(computerID){
 // deleteComp(12);
 
 // Updates computer data
-var updateComp = function(room, computerID, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
-  connection.query('UPDATE comps SET room = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
+var updateComp = function(room, computerID, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
+  connection.query('UPDATE comps SET room = ?, ip = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
     if (err) throw err;
     console.log('Updated computer ' + computerID);
   });
@@ -132,6 +139,19 @@ var getAllUsers = function(){
   });
 };
 
+var userExists = function(user){
+  connection.query('SELECT * FROM users WHERE username = ?', [user], function(err,res){
+    if (err) throw err;
+    if (res[0] == undefined){
+      console.log('false');
+      return false;
+    } else{
+      console.log('true');
+      return true;
+    }
+  });
+};
+
 var authenticate = function(user,pass){
   connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [user,pass], function(err,res){
     if (err) throw err;
@@ -142,11 +162,19 @@ var authenticate = function(user,pass){
     } else{
       console.log('true');
       return true;
-    };
+    }
   });
 };
 
+
+//connection.query('drop table comps');
 init();
+
+addComp(301,33,'1.3.4.5665',1,3,'lenovo','linux','02-12-2003','03-15-2009','Y',1,'theres poop on it erhiureojhrtohi jrotij rthtioj htiojhtoi jhitoho rtjhirth rth');
+//updateComp(555,33,'1.3.4.5665',1,3,'lenovo','linux','02-12-2003','03-15-2009','Y',1,'theres poop on it');
+getAllComp();
 //addUser('darwin','darwinchiu');
 authenticate('dain','darwiu');
 getAllUsers();
+
+

@@ -1,12 +1,6 @@
 #!/bin/bash
-echo "CPU Name: " >> output.txt
 hostname >> output.txt
+cat /sys/devices/virtual/dmi/id/bios_date >> output.txt
 
-echo "CPU Info: " >> output.txt
-lscpu >> output.txt
-
-echo "Version: " >> output.txt
-cat /proc/version >> output.txt
-
-echo "=====" >> output.txt
-echo "" >> output.txt
+{ cat /proc/version; echo "!!"; } | tr "\n" " " >> output.txt
+echo '==' >> output.txt

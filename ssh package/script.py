@@ -1,6 +1,6 @@
 import paramiko, errno, time
 
-f = open("output.txt", "w")
+f = open("output.csv", "w")
 
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -17,7 +17,6 @@ for i in range(33):
     for attempt in range(30):
         try:
             ssh.connect(host, port = 22, username="hanzhangfrankl.wang", password="dragons123")
-            timeRun = time.time()   
         except EnvironmentError as exc:
             if exc.errno == errno.ECONNREFUSED:
                 skippedHosts += host + "\n"
@@ -37,15 +36,17 @@ for i in range(33):
     else:
         raise RuntimeError("too bad")
     
-    stdin, stdout, stderr = ssh.exec_command("lscpu")
-    
+    stdin, stdout, stderr = ssh.exec_command("hostname")
     cpu = stdout.read()
     
     stdin, stdout, stderr = ssh.exec_command("cat /proc/version")
     version = stdout.read()
     
+    stdin, stdout, stderr = ssh.exec_command("cat /sys/devices/virtual/dmi/id/sys_vendor")
+    compType = stdout.read()
+    
     ssh.close()
-    CPUlist += host + "\n" + cpu + "\n" + version +"\n|||||\n"
+    CPUlist += host + "," + cpu + "," + version + ',' + compType + '\n'
     
 print CPUlist
 
