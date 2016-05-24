@@ -16,7 +16,16 @@ html
     nav
       div.nav-wrapper.blue.darken-3
         a(href="/" class="brand-logo") &nbsp;&nbsp;Computer Labs
-        ul.right
+        a(href="#" data-activates="mobile-demo" class="button-collapse")
+          i.material-icons menu
+        ul.right.hide-on-med-and-down#nav-mobile
+          li
+            a(href="/computers") Computers
+          li
+            a(href="/issues") Issues
+          li
+            a(href="/login") Login
+        ul.side-nav#mobile-demo
           li
             a(href="/computers") Computers
           li
@@ -29,3 +38,9 @@ html
     | <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     // Materialize Javascript
     script(src="/javascripts/materialize.min.js")
+    // For the Resizable Navbar
+    script.
+      $( document ).ready(function(){
+        $(".button-collapse").sideNav();
+      });
+      
