@@ -7,6 +7,11 @@ block content
   div.row
    form.col.s6.offset-s3
      h3 Login
+     if error
+       div.container
+         ul.collection.with-header
+           li.collection-header.indigo.lighten-5
+             big Error: #{error}
      div.row
        div.input-field.col.s12
          input(id="username" type="text" class="validate")

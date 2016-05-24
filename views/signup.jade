@@ -5,19 +5,24 @@ block variables
 
 block content
   div.row
-    form.col.s6.offset-s3
+    form.col.s6.offset-s3(method="POST")
       h3 Sign Up
+      if error
+        div.container
+          ul.collection.with-header
+            li.collection-header.indigo.lighten-5
+              big Error: #{error}
       div.row
         div.input-field.col.s12
-          input(id="username" type="text" class="validate")
+          input(name="username" type="text" class="validate")
           label(for="username" class="active") Name
       div.row
         div.input-field.col.s12
-          input(id="password" type="password" class="validate")
+          input(name="password" type="password" class="validate")
           label(for="password" class="active") Password
       div.row
         div.input-field.col.s12
-          input(id="password" type="password" class="validate")
-          label(for="password" class="active") Confirm Password
+          input(name="passwordc" type="password" class="validate")
+          label(for="passwordc" class="active") Confirm Password
       div.row
         button.btn.waves-effect.waves-light(type="submit" name="action") Submit

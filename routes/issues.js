@@ -9,8 +9,7 @@ router.get('/', function(req, res, next) {
        {"name": "cslab-1-10", "description": "Internet not working.", "level": 1},
        {"name": "cslab-1-11", "description": "Screen was cracked in half.", "level": 2},
        {"name": "cslab-1-15", "description": "Login not working.", "level": 2}
-     ],
-     route: "issues"});
+     ]});
 });
 
 module.exports = router;
