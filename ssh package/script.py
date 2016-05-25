@@ -5,12 +5,12 @@ f = open("output.csv", "w")
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-CPUlist = ""
+CPUlist = "IP Address,Hostname,Version,Type\n"
 skippedHosts = ""
 
 
 
-for i in range(33):
+for i in range(6):
     host = "149.89.150." + str(100+i)
     print host
     
@@ -37,13 +37,13 @@ for i in range(33):
         raise RuntimeError("too bad")
     
     stdin, stdout, stderr = ssh.exec_command("hostname")
-    cpu = stdout.read()
+    cpu = stdout.read().strip('\n')
     
     stdin, stdout, stderr = ssh.exec_command("cat /proc/version")
-    version = stdout.read()
+    version = stdout.read().strip('\n')
     
     stdin, stdout, stderr = ssh.exec_command("cat /sys/devices/virtual/dmi/id/sys_vendor")
-    compType = stdout.read()
+    compType = stdout.read().strip('\n')
     
     ssh.close()
     CPUlist += host + "," + cpu + "," + version + ',' + compType + '\n'

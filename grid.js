@@ -42,7 +42,7 @@ var Computer = function() {
     };
 };
 
-var Alert = function(){
+var AlertPop = function(){
     
     var xcor,ycor,height,width,alertColor,description;
     
@@ -50,4 +50,6 @@ var Alert = function(){
 
 var populateRoom = function(){
   //goes through database and create a room object with computers  
+  {
+  
 };

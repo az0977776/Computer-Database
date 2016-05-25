@@ -1,8 +1,5 @@
 extends layout
 
-block variables
-  var route = #{route}
-
 block content
   div.row
     form.col.s6.offset-s3(method="POST")
@@ -11,7 +8,7 @@ block content
         div.container
           ul.collection.with-header
             li.collection-header.indigo.lighten-5
-              big Error: #{error}
+              big #{error}
       div.row
         div.input-field.col.s12
           input(name="username" type="text" class="validate")

@@ -6,9 +6,6 @@ var connection = mysql.createConnection({
   database : 'labs'
 });
 
-//functions to add
-//add comp, delete comp, update comp, get all comp?, get all comps in a room, get comp with issuelevel
-
 // Initialize connection for use
 var init = function() {
   connection.connect(function(err) {
@@ -39,7 +36,7 @@ var init = function() {
               + 'issueLevel INT,'
               + 'description VARCHAR(10000),'
               + 'PRIMARY KEY (computerID)'
-              +  ')', function (err) {
+              + ')', function (err) {
                   if (err) throw err;
               });
           connection.query('CREATE TABLE IF NOT EXISTS users('
@@ -51,13 +48,13 @@ var init = function() {
               });
           connection.query('CREATE TABLE IF NOT EXISTS classrooms('
               + 'roomNumber INT,'
-              + 'notes VARCHAR(10000),' 
+              + 'notes VARCHAR(10000)' 
               + ')', function (err) {
                 if (err) throw err;
               });
       });
   });
-}
+};
 
 // Adds computer to table. computerID is unique
 var addComp = function(room, computerID, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
@@ -139,6 +136,7 @@ var getAllUsers = function(){
   });
 };
 
+// Checks if a user exists
 var userExists = function(user){
   connection.query('SELECT * FROM users WHERE username = ?', [user], function(err,res){
     if (err) throw err;
@@ -152,6 +150,7 @@ var userExists = function(user){
   });
 };
 
+// authentication for logging
 var authenticate = function(user,pass){
   connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [user,pass], function(err,res){
     if (err) throw err;
@@ -166,15 +165,41 @@ var authenticate = function(user,pass){
   });
 };
 
+// Adds note about a room
+var addRoomNote = function(room,notes){
+  connection.query('INSERT INTO classrooms SET ?', {roomNumber:room, notes:notes},function(err){
+    if (err) throw err;
+    console.log('Added note');
+  });
+};
 
-//connection.query('drop table comps');
-init();
+var getRoomNotes = function(room){
+  connection.query('SELECT * FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
+    if (err) throw err;
+    console.log(res);
+  });
+};
 
-addComp(301,33,'1.3.4.5665',1,3,'lenovo','linux','02-12-2003','03-15-2009','Y',1,'theres poop on it erhiureojhrtohi jrotij rthtioj htiojhtoi jhitoho rtjhirth rth');
+var deleteRoomNote = function(room){
+  connection.query('DELETE FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
+    if (err) throw err;
+    console.log('Deleted ' + res.affectedRows + ' rows');
+  });
+};
+
+connection.query('drop table comps');
+connection.query('drop table users');
+connection.query('drop table classrooms');
+//init();
+//userExists('darwin');
+//addComp(301,33,'1.3.4.5665',1,3,'lenovo','linux','02-12-2003','03-15-2009','Y',1,'theres poop on it erhiureojhrtohi jrotij rthtioj htiojhtoi jhitoho rtjhirth rth');
 //updateComp(555,33,'1.3.4.5665',1,3,'lenovo','linux','02-12-2003','03-15-2009','Y',1,'theres poop on it');
-getAllComp();
+//deleteComp(33);
+//getAllComp();
 //addUser('darwin','darwinchiu');
-authenticate('dain','darwiu');
-getAllUsers();
-
+//authenticate('dain','darwiu');
+//getAllUsers();
+//addRoomNote(301,'this room smells like poop');
+//deleteRoomNote(301);
+//getRoomNotes(301);
 

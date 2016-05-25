@@ -12,10 +12,21 @@ router.post('/', function(req, res, next) {
   console.log(req.body.password);
   console.log(req.body.passwordc);
   if (req.body.password != req.body.passwordc) {
-    res.render('signup', {route: "signup", error: "Password and Confirm Password Do Not Match!"});
+    res.render('signup', {route: "signup", error: "Error: Password and Confirm Password Do Not Match!"});
   }
-  // INSERT DATABASE CODE HERE
-  res.render('signup', {route: "signup"});
+  else {
+    var database = require('../databaseModule.js');
+    database.init();
+    
+    if (database.userExists(req.body.username)) {
+      res.render('signup', {route: "signup", error: "Error: User Already Exists!"});
+    }
+    else {
+      console.log("Adding User!");
+      database.addUser(req.body.username, req.body.password);
+      res.render('signup', {route: "signup", error: "Signup Succesful!"});
+    }
+  }
 });
 
 module.exports = router;

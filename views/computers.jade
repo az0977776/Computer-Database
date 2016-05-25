@@ -1,11 +1,15 @@
 extends layout
 
-block variables
-  var route = #{route}
-
 block content
   div.container
     h1 Computers
-      | #{output}
-
+    ul
+      - each val in rooms
+        - var str = "/room/" + val
+        - var btn = "Room " + val
+        li
+          a(href=str)
+            button.wavs-effect.waves-light.btn #{btn}
+          br
+          br
         
