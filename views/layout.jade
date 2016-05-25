@@ -12,6 +12,10 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   
   body
+    // JQuery CDN
+    | <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    // Materialize Javascript
+    script(src="/javascripts/materialize.min.js")
     nav
       div.nav-wrapper.blue.darken-3
         a(href="/" class="brand-logo") &nbsp;&nbsp;Computer Labs
@@ -33,10 +37,6 @@ html
             a(href="/login") Login
             
     block content
-    // JQuery CDN
-    | <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    // Materialize Javascript
-    script(src="/javascripts/materialize.min.js")
     // For the Resizable Navbar
     script.
       $( document ).ready(function(){

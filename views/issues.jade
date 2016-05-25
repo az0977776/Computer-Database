@@ -1,11 +1,8 @@
 extends layout
-
-block variables
-  var route = #{route}
   
 block content
   div.container
-    h1 Issues
+    h1 Issues        
     ul.collection.with-header
       - each issue in issues
         li.collection-item.avatar.indigo.lighten-5
@@ -21,17 +18,20 @@ block content
             b #{issue.name}
           p Description: #{issue.description}
           p Severity: #{level}
-          a(href="#").secondary-content
+          a(class="modal-trigger modal-close" href="#modal1").secondary-content
             i.material-icons close
-  //- div.container
-  //-   h1 Issues
-  //-   - each issue in issues
-  //-     div.card-panel.indigo.lighten-4.z-depth-1
-  //-       span 
-  //-         b 
-  //-           big #{issue.name} 
-  //-         i.material-icons.right close
-  //-       div.container
-  //-         p Description: #{issue.description} 
-  //-         p Level: #{issue.level}
+            
+    div.modal(id="modal1")
+      div.modal-content
+        p Are you sure this issue has been fixed?
+      div.modal-footer
+        a(href="#" id="confirm" class="modal-action modal-close waves-effect waves-green btn-flat") Confirm
+        a(href="#" class="modal-action modal-close waves-effect waves-red btn-flat") Cancel
         
+  script.
+    $(".modal-trigger").click(function(){
+      $('#modal1').openModal();
+    });
+    $("#confirm").click(function(){
+      
+    });
