@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
   else {
     var database = require('../databaseModule.js');
     database.init();
-    
+
     if (database.userExists(req.body.username)) {
       res.render('signup', {route: "signup", error: "Error: User Already Exists!"});
     }

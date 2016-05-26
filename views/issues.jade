@@ -1,11 +1,12 @@
 extends layout
-  
 block content
   div.container
     h1 Issues        
     ul.collection.with-header
+      - var counter = 0;
       - each issue in issues
-        li.collection-item.avatar.indigo.lighten-5
+        - counter++;
+        li.collection-item.avatar.indigo.lighten-5(id="li" + counter.toString())
           - var level = parseInt(issue.level) + 1;
           case level
             when 1
@@ -21,17 +22,21 @@ block content
           a(class="modal-trigger modal-close" href="#modal1").secondary-content
             i.material-icons close
             
-    div.modal(id="modal1")
+    div.modal(id="check")
       div.modal-content
         p Are you sure this issue has been fixed?
       div.modal-footer
         a(href="#" id="confirm" class="modal-action modal-close waves-effect waves-green btn-flat") Confirm
         a(href="#" class="modal-action modal-close waves-effect waves-red btn-flat") Cancel
-        
+      
+  // Show Confirm Modal When "X" Button is Clicked; Remove Div if Confirmed  
   script.
+    var store = null;
     $(".modal-trigger").click(function(){
-      $('#modal1').openModal();
+      store = "#" + $(this).parent().closest('li').attr('id');
+      $('#check').openModal();
     });
     $("#confirm").click(function(){
-      
+      console.log("confirmed");
+      $(store).remove();
     });

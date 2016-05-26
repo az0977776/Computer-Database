@@ -6,6 +6,54 @@ var connection = mysql.createConnection({
   database : 'labs'
 });
 
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('connected as id ' + connection.threadId);
+});
+
+//Creates database and table if not already made
+connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
+    if (err) throw err;
+    console.log('created db');
+    connection.query('USE labs', function (err) {
+        if (err) throw err;
+        connection.query('CREATE TABLE IF NOT EXISTS comps('
+            + 'room INT,'
+            + 'computerID INT,'
+            + 'ip VARCHAR(20),'
+            + 'xcor INT,'
+            + 'ycor INT,'
+            + 'type VARCHAR(25),'
+            + 'OS VARCHAR(25),'
+            + 'installation DATE,'
+            + 'updated DATE,'
+            + 'working CHAR(1),'
+            + 'issueLevel INT,'
+            + 'description VARCHAR(10000),'
+            + 'PRIMARY KEY (computerID)'
+            + ')', function (err) {
+                if (err) throw err;
+            });
+        connection.query('CREATE TABLE IF NOT EXISTS users('
+            + 'username VARCHAR(15),'
+            + 'password VARCHAR(15),'
+            + 'PRIMARY KEY (username)'
+            + ')', function(err) {
+                if (err) throw err;
+            });
+        connection.query('CREATE TABLE IF NOT EXISTS classrooms('
+            + 'roomNumber INT,'
+            + 'notes VARCHAR(10000)'
+            + ')', function (err) {
+              if (err) throw err;
+            });
+    });
+});
+
+
 // Initialize connection for use
 var init = function() {
   connection.connect(function(err) {
@@ -15,7 +63,7 @@ var init = function() {
     }
     console.log('connected as id ' + connection.threadId);
   });
-  
+
   //Creates database and table if not already made
   connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
       if (err) throw err;
@@ -48,7 +96,7 @@ var init = function() {
               });
           connection.query('CREATE TABLE IF NOT EXISTS classrooms('
               + 'roomNumber INT,'
-              + 'notes VARCHAR(10000)' 
+              + 'notes VARCHAR(10000)'
               + ')', function (err) {
                 if (err) throw err;
               });
@@ -147,7 +195,7 @@ var userExists = function(user){
       console.log('true');
       return true;
     }
-  }); 
+  });
 };
 
 // authentication for logging
@@ -187,6 +235,7 @@ var deleteRoomNote = function(room){
   });
 };
 
+init();
 connection.query('drop table comps');
 connection.query('drop table users');
 connection.query('drop table classrooms');
@@ -202,4 +251,3 @@ connection.query('drop table classrooms');
 //addRoomNote(301,'this room smells like poop');
 //deleteRoomNote(301);
 //getRoomNotes(301);
-
