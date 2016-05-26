@@ -136,6 +136,19 @@ module.exports = {
     });
   },
   
+  userExists : function(user){
+    connection.query('SELECT * FROM users WHERE username = ?', [user], function(err,res){
+      if (err) throw err;
+      if (res[0] == undefined){
+        console.log('false');
+        return false;
+      } else{
+        console.log('true');
+        return true;
+      }
+    }); 
+  },
+  
   // Testing purposes
   getAllUsers : function(){
     connection.query('SELECT * FROM users', function(err,res){
