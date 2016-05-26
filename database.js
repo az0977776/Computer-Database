@@ -147,7 +147,7 @@ var userExists = function(user){
       console.log('true');
       return true;
     }
-  });
+  }); 
 };
 
 // authentication for logging

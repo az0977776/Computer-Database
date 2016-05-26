@@ -50,6 +50,6 @@ var AlertPop = function(){
 
 var populateRoom = function(){
   //goes through database and create a room object with computers  
-  {
+  // [{"name":"cs101","os":"windows","date":"12-9-41","xcor":0,"ycor":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":0,"ycor":1}]
   
 };
