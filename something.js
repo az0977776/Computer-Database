@@ -8,3 +8,14 @@ var version = {'149.89.150.132': 'Linux version 3.13.0-86-generic (buildd@lgw01-
 
 var compType = {'149.89.150.132': 'LENOVO', '149.89.150.126': 'LENOVO', '149.89.150.124': 'LENOVO', '149.89.150.125': 'LENOVO', '149.89.150.108': 'LENOVO', '149.89.150.109': 'LENOVO', '149.89.150.120': 'LENOVO', '149.89.150.121': 'LENOVO', '149.89.150.122': 'LENOVO', '149.89.150.123': 'LENOVO', '149.89.150.102': 'LENOVO', '149.89.150.103': 'LENOVO', '149.89.150.100': 'LENOVO', '149.89.150.101': 'LENOVO', '149.89.150.106': 'LENOVO', '149.89.150.107': 'LENOVO', '149.89.150.104': 'LENOVO', '149.89.150.105': 'LENOVO', '149.89.150.127': 'LENOVO', '149.89.150.128': 'LENOVO', 
 '149.89.150.129': 'LENOVO', '149.89.150.119': 'LENOVO', '149.89.150.118': 'LENOVO', '149.89.150.131': 'LENOVO', '149.89.150.130': 'LENOVO', '149.89.150.111': 'LENOVO', '149.89.150.110': 'LENOVO', '149.89.150.113': 'LENOVO', '149.89.150.112': 'LENOVO', '149.89.150.115': 'LENOVO', '149.89.150.114': 'LENOVO', '149.89.150.117': 'LENOVO', '149.89.150.116': 'LENOVO'};
+
+var database = require('./databaseModule.js');
+database.init();
+
+// for(var key in hostname){
+//     database.addComp(307,hostname[key],key,null,null,compType[key],version[key],null,null,'Y',null,null);
+//     console.log(key);
+// };
+
+database.getAllComp();
+//database.reset();
