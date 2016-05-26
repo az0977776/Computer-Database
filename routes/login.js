@@ -10,12 +10,27 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   console.log(req.body.username);
   console.log(req.body.password);
-  console.log(req.body.passwordc);
-  if (req.body.password != req.body.passwordc) {
-    res.render('login', {error: "Password and Confirm Password Do Not Match!"});
-  }
-  // INSERT DATABASE CODE HERE
-  res.render('login');
+
+  var database = require('../databaseModule.js');
+  database.init();
+
+  database.userExists(req.body.username, function(message) {
+    if (message == false) {
+      console.log("User Does Not Exist!");
+      res.render('login', {error: "Error: User Does Not Exist!"});
+    }
+    else { // User Exists
+      console.log("Logging In!");
+      database.authenticate(req.body.username, req.body.password, function(message) {
+        if (message == false) {
+          res.render('login', {error: "Error: Password Does Not Match The Given User!"});
+        }
+        else {
+          res.render('login', {error: "Login Succesful!"});
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;
