@@ -11,7 +11,7 @@ skippedHosts = ""
 
 
 for i in range(33):
-    host = "149.89.150." + str(100+i)
+    host = "149.89.150." + str(100+i)#160,161
     print host
     
     for attempt in range(30):

@@ -2,22 +2,24 @@ var svg = document.getElementById("mysvg");
 
 //how to read from database
 var computers = [];
-var databaseComp = [{"name":"cs101","os":"windows","date":"12-9-41","xcor":6,"ycor":6, "issue":2},{"name":"cs102","os":"windows","date":"12-9-41","xcor":0,"ycor":1, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":1, "issue":0}];       
+var databaseComp = [{"name":"cs101","os":"windows","date":"12-9-41","xcor":0,"ycor":0, "issue":2},{"name":"cs102","os":"windows","date":"12-9-41","xcor":0,"ycor":1, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":1, "issue":0},{"name":"cs101","os":"windows","date":"12-9-41","xcor":2,"ycor":0, "issue":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":3,"ycor":0, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":0, "issue":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":3,"ycor":1, "issue":0},{"name":"cs111","os":"windows","date":"12-9-41","xcor":2,"ycor":1, "issue":0}];       
 
 var Computer = function(CompDictionary) {
     
-    var alertColors;//list of possible colors
-    var xcor,ycor,height,width,alertColor,alert;
+    var issueColors = ["green","yellow","red"];//list of possible colors
     
-    alertColors = ["green","yellow","red"];
-    
-    alertColor = alertColors[0];//depends on alert type
-    width = $(window).width()/8;//might depend on screen height
-    height = $(window).width()/8;//might depend on screen height
-    xcor = CompDictionary['xcor']*$(window).width();//depends on index in the grid
-    ycor = CompDictionary['ycor']*$(window).width();//depends on index in the grid
-    color = alertColors[CompDictionary['issue']];
-    
+    var width = $(window).width()/15;//might depend on screen height
+    var height = $(window).width()/15;//might depend on screen height
+    var xcor = CompDictionary['xcor']*($(window).width()/15 + 10);//depends on index in the grid
+    var ycor = CompDictionary['ycor']*($(window).width()/15 + 10);//depends on index in the grid
+    var color = issueColors[CompDictionary['issue']];
+    var name = CompDictionary['name'];
+    var infoString = CompDictionary['name'] + "\n" + CompDictionary['os'];
+    console.log(infoString);
+
+    var compLink = document.createElementNS("http://www.w3.org/2000/svg", "a");
+    compLink.setAttribute("href", "/comp/" + CompDictionary['name']);
+
     var comp = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     comp.setAttribute("x", xcor);
     comp.setAttribute("y", ycor);
@@ -25,9 +27,21 @@ var Computer = function(CompDictionary) {
     comp.setAttribute("height", height);
     comp.setAttribute("fill", color);
     comp.setAttribute("stroke", "black");
-    svg.appendChild(comp);
+    comp.setAttribute("class", "tooltip");
     
-        return {
+    var compInfo = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    compInfo.setAttribute("class", "tooltiptext");
+    compInfo.setAttribute("x",xcor + 40);
+    compInfo.setAttribute("y",ycor + 40);
+    compInfo.setAttribute("fill","black");
+    compInfo.setAttribute("pointer-events","none");
+    compInfo.innerHTML = infoString;
+    
+    compLink.appendChild(comp);
+    compLink.appendChild(compInfo);
+    svg.appendChild(compLink);
+
+    return {
         xcor : xcor,
         ycor : ycor,
         width : width,
@@ -35,12 +49,6 @@ var Computer = function(CompDictionary) {
         alert : alert
     };
 };
-
-var AlertPop = function(){
-    
-    var xcor,ycor,height,width,alertColor,description;
-    
-}
 
 var populateRoom = function(){
   //goes through database and create a room object with computers  
