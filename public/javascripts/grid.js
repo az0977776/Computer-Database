@@ -21,12 +21,11 @@ var Computer = function(CompDictionary) {
     compLink.setAttribute("href", "/comp/" + CompDictionary['name']);
 
     var comp = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    comp.setAttribute("x", xcor);
-    comp.setAttribute("y", ycor);
+    comp.setAttribute("x", xcor + 5);
+    comp.setAttribute("y", ycor + 5);
     comp.setAttribute("width", width);
     comp.setAttribute("height", height);
-    comp.setAttribute("fill", color);
-    comp.setAttribute("stroke", "black");
+    comp.setAttribute("style", "fill:" + color + ";stroke:black;stroke-width:5;opacity:0.5");
     comp.setAttribute("class", "tooltip");
     
     var compInfo = document.createElementNS("http://www.w3.org/2000/svg", "text");
