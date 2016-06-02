@@ -8,13 +8,14 @@ var connection = mysql.createConnection({
 
 module.exports = {
   // Initialize connection for use
-  init : function() {
+  init : function(callback) {
     connection.connect(function(err) {
       if (err) {
         console.error('error connecting: ' + err.stack);
-        return;
+        return false;
       }
       console.log('connected as id ' + connection.threadId);
+      return true;
     });
 
     //Creates database and table if not already made
@@ -214,7 +215,7 @@ module.exports = {
       }
     });
   },
-  
+
   //gets all notes for a room
   //Parameter:
   //room int
@@ -225,8 +226,8 @@ module.exports = {
       console.log(res);
     });
   },
-  
-  
+
+
   //deletes a room note
   //Parameter:
   //room string

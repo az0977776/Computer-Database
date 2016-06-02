@@ -5,12 +5,12 @@ var router = express.Router();
 
 /* GET room page. */
 router.get('/:room', function(req, res, next) {
-    
+
     console.log(req.params);
-    
-     
+
+
     res.render('room', req.params)
-    
+
     //var mysql      = require('mysql');
     //var connection = mysql.createConnection({
     //    host     : 'localhost',
@@ -19,7 +19,6 @@ router.get('/:room', function(req, res, next) {
     //    database : 'labs'
     //});
     //connection.connect();
-
 
     //connection.end();
 });
