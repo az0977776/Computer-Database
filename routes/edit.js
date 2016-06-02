@@ -12,14 +12,7 @@ router.post('/', function(req, res, next) {
   console.log(req.body.fill);
 
   var database = require('../databaseModule.js');
-  database.init(function(message){
-    if(message == true) {
-      
-    }
-    if(message == false) {
-
-    }
-  });
+  database.init();
   res.render('edit');
 });
 

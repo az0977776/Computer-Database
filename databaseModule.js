@@ -8,14 +8,12 @@ var connection = mysql.createConnection({
 
 module.exports = {
   // Initialize connection for use
-  init : function(callback) {
+  init : function() {
     connection.connect(function(err) {
       if (err) {
         console.error('error connecting: ' + err.stack);
-        return false;
       }
       console.log('connected as id ' + connection.threadId);
-      return true;
     });
 
     //Creates database and table if not already made
