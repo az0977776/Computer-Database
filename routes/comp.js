@@ -6,11 +6,10 @@ var router = express.Router();
 /* GET room page. */
 router.get('/:name', function(req, res, next) {
     
-    console.log(req.params);
-    
-    
+    var requestDictionary = req.params; 
+    requestDictionary['message'] = 'grabbing data from database';
      
-    res.render('comp', req.params)
+    res.render('comp', requestDictionary)
     
     //var mysql      = require('mysql');
     //var connection = mysql.createConnection({
