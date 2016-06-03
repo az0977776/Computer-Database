@@ -2,19 +2,28 @@ extends layout
 
 block content
   div.row
-   form.col.s6.offset-s3(method="POST")
-     h3 Add Issue
-     if error
-       div.container
-         ul.collection.with-header
-           li.collection-header.indigo.lighten-5
-             big #{error}
-     div.row
-       div.input-field.col.s6
-         input(name="id" type="text" class="validate")
-         label(for="id" class="active") Computer Number
-       div.input-field.col.s12
-         textarea.materialize-textarea(name="fill")
-         label(for="fill") Issues
+    form.col.s6.offset-s3(method="POST")
+      h3 Add Issue
+      if error
+        div.container
+          ul.collection.with-header
+            li.collection-header.indigo.lighten-5
+              big #{error}
+      div.row
+        div.input-field.col.s6
+          input(name="id" type="text" class="validate" placeholder="ex: cslab1-5")
+          label(for="id" class="active") Computer Number
+      div.row
+        div.input-field.col.s12
+          select(name="level")
+            option(value="" disabled selected) Choose an option (1 is minimal - 3 is severe)
+            option(value="0") Level 1
+            option(value="1") Level 2
+            option(value="2") Level 3
+          label Issue Level
+      div.row
+        div.input-field.col.s12
+          textarea.materialize-textarea(name="fill" placeholder="ex: SSH Not Working.")
+          label(for="fill") Issues
       div.row
         button.btn.waves-effect.waves-light(type="submit" name="action") Add Issue
