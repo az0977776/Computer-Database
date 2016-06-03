@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
   else {
     res.redirect('login');
   }
-
 });
 
 /* POST signup page. */
@@ -37,7 +36,14 @@ router.post('/', function(req, res, next) {
   else {
     var database = require('../databaseModule.js');
     database.init();
-    res.render('edit');
+    database.compExists(req.body.id, function(message){
+      if (message == true) {
+        database.addIssues(req.body.id, req.body.level, req.body.fill);
+      }
+      else {
+        res.render('edit', {error: "Error: Selected Computer Does Not Exist!"});
+      }
+    });
   }
 });
 
