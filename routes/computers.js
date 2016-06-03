@@ -4,16 +4,6 @@ var router = express.Router();
 var app = express();
 
 var login = require('./login');
-//sessions
-var cookieParser = require('cookie-parser');
-var session = require("client-sessions");
-
-app.use(session({
-  cookieName: 'session',
-  secret: 'applekim.thunderbird',
-  duration: 30 * 60 * 1000,//idle time until logout
-  activeDuration: 5 * 60 * 1000,//updates time until logout
-}));
 
 /* GET computers page. */
 router.get('/', function(req, res, next) {

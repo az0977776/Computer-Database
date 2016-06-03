@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
   console.log(req.body.level);
   console.log(req.body.fill);
 
-  var check = /cslab[\d]+-[\d]+/;
+  var check = /cslab[\d]*-[\d]+/;
 
   if(!check.test(req.body.id)){
     console.log('here');
