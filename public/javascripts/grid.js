@@ -1,14 +1,20 @@
 var svg = document.getElementById("mysvg");
-var database = require("../databaseModule.js");
+//var database = require("../../databaseModule.js");
+
+console.log("test start of file");
+console.log(room);
 
 //how to read from database
 var computers = [];
-var databaseComp = [{"name":"cs101","os":"windows","date":"12-9-41","xcor":0,"ycor":0, "issue":2},{"name":"cs102","os":"windows","date":"12-9-41","xcor":0,"ycor":1, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":1, "issue":0},{"name":"cs101","os":"windows","date":"12-9-41","xcor":2,"ycor":0, "issue":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":3,"ycor":0, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":0, "issue":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":3,"ycor":1, "issue":0},{"name":"cs111","os":"windows","date":"12-9-41","xcor":2,"ycor":1, "issue":0}];
+//var databaseComp = [{"name":"cs101","os":"windows","date":"12-9-41","xcor":0,"ycor":0, "issue":2},{"name":"cs102","os":"windows","date":"12-9-41","xcor":0,"ycor":1, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":1, "issue":0},{"name":"cs101","os":"windows","date":"12-9-41","xcor":2,"ycor":0, "issue":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":3,"ycor":0, "issue":1},{"name":"cs111","os":"windows","date":"12-9-41","xcor":1,"ycor":0, "issue":0},{"name":"cs102","os":"windows","date":"12-9-41","xcor":3,"ycor":1, "issue":0},{"name":"cs111","os":"windows","date":"12-9-41","xcor":2,"ycor":1, "issue":0}];
 
-var getDatabase = function(room) {
-    database.init();
-    var databaseComp = database.getAllCompInRoom(room);
-}
+// var getDatabase = function(room) {
+//     console.log("getdatabase");
+//     database.init();
+//     console.log(room);
+//     databaseComp = database.getAllCompInRoom(room);
+//     console.log(databaseComp);
+// }
 
 var Computer = function(CompDictionary) {
 
@@ -60,8 +66,7 @@ var Computer = function(CompDictionary) {
 };
 
 var populateRoom = function(room){
-  //goes through database and create a room object with computers
-  getDatabase(room);
+  console.log("populate ROOM");
   var newComp;
   //populate from the database
   for (var i = 0; i < databaseComp.length; i++) {
@@ -71,3 +76,5 @@ var populateRoom = function(room){
 
 };
 
+populateRoom(room);
+console.log('test end of file');
