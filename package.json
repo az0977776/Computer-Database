@@ -16,6 +16,7 @@
     "async": "^2.0.0-rc.4",
     "basic-auth": "^1.0.4",
     "body-parser": "^1.13.3",
+    "browserify": "^13.0.1",
     "bytes": "^2.3.0",
     "camelcase": "^3.0.0",
     "center-align": "^0.1.3",
