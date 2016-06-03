@@ -1,13 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-
 var app = express();
 //sessions
 var cookieParser = require('cookie-parser');
 var session = require("client-sessions");
-
-
 
 app.use(session({
   cookieName: 'session',

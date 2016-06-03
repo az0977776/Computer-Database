@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
       else {
         console.log("Adding User!");
         database.addUser(req.body.username, req.body.password);
-        res.render('login', {error: "Signup Succesful!"});
+        res.redirect('login');
       }
     });
   }

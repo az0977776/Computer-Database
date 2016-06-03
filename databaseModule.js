@@ -16,7 +16,7 @@ module.exports = {
       console.log('connected as id ' + connection.threadId);
     });
 
-    //Creates database and table if not already made
+    // Creates database and table if not already made
     connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
         if (err) throw err;
         console.log('created db');
@@ -55,9 +55,10 @@ module.exports = {
   },
 
   // Adds computer to table. computerID is unique
-  //Parameters:
-  //room int, computerID string, ip string, xcor int, ycor int, type string, OS string, installation string, updated string, working string, issueLevel int, description string
-  //Returns if computer is added or it already exists
+  // Parameters:
+  //   room int, computerID string, ip string, xcor int, ycor int, type string, OS string, installation string, updated string, working string, issueLevel int, description string
+  // Returns:
+  //   if computer is added or it already exists
   addComp : function(room, computerID, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
     connection.query('SELECT * FROM comps WHERE computerID = ? OR ip = ?', [computerID,ip], function(err,res){
       if (err) throw err;
@@ -75,9 +76,9 @@ module.exports = {
 
 
   // Delete computer by ID
-  //Parameters:
-  //computerID string
-  //Returns if row is changed
+  // Parameters:
+  //   computerID string
+  // Returns if row is changed
   deleteComp : function(computerID){
     connection.query('DELETE FROM comps WHERE computerID = ?', [computerID], function (err, res){
       if (err) throw err;
@@ -87,9 +88,10 @@ module.exports = {
 
 
   // Updates computer data
-  //Parameters:
-  //room int, computerID string, ip string, xcor int, ycor int, type string, OS string, installation string, updated string, working string, issueLevel int, description string
-  //Returns updated computerID
+  // Parameters:
+  //   room int, computerID string, ip string, xcor int, ycor int, type string, OS string, installation string, updated string, working string, issueLevel int, description string
+  // Returns:
+  //   updated computerID
   updateComp : function(room, computerID, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
     connection.query('UPDATE comps SET room = ?, ip = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
       if (err) throw err;
@@ -99,7 +101,8 @@ module.exports = {
 
 
   // Gets all computers
-  //Returns dictionary of all computer data
+  // Returns:
+  //   dictionary of all computer data
   getAllComp : function(){
     connection.query('SELECT * FROM comps', function(err,res){
       if (err) throw err;
@@ -109,8 +112,9 @@ module.exports = {
   },
 
 
-  //Gets all computers in a room
-  //Returns dictionary of all computer data in a room
+  // Gets all computers in a room
+  // Returns:
+  //   dictionary of all computer data in a room
   getAllCompInRoom : function(room){
     connection.query('SELECT * FROM comps WHERE room = ?', [room], function(err, res){
       if (err) throw err;
@@ -121,7 +125,8 @@ module.exports = {
 
 
   // Gets all computers with specified issue level
-  //Returns dictionary of all computer data with a issue
+  // Returns:
+  //   dictionary of all computer data with a issue
   getIssues : function(issueLevel){
     connection.query('SELECT * FROM comps WHERE issueLevel = ?', [issueLevel], function(err, res){
       if (err) throw err;
@@ -129,26 +134,27 @@ module.exports = {
       console.log(res);
     });
   },
-  
-  //Add issues
+
+  // Add issues
   addIssues : function(computerID, issueLevel, issue){
     connection.query('UPDATE comps set issueLevel = ?, description = ? WHERE computerID = ?', [issueLevel, issue, computerID], function(err){
       if (err) throw err;
       console.log('Updated description for computer ' + computerID);
     });
   },
-  
+
   addCoord : function(computerID, x, y){
     connection.query('UPDATE comps set xcor = ?, ycor = ? WHERE computerID = ?', [x, y, computerID], function(err){
       if (err) throw err;
       console.log('Updated coordinates for computer ' + computerID);
     });
-  }, 
+  },
 
   // User database
-  //Parameters:
-  //user string, pass string
-  //Returns if user is created or it exists
+  // Parameters:
+  //   user string, pass string
+  // Returns:
+  //   if user is created or it exists
   addUser : function(user,pass){
     connection.query('SELECT * FROM users WHERE username = ?', [user], function(err,res){
       if (err) throw err;
@@ -164,10 +170,11 @@ module.exports = {
     });
   },
 
-  //checks if a user exists
-  //Parameter:
-  //user string
-  //returns boolean
+  // checks if a user exists
+  // Parameter:
+  //   user string
+  // Returns:
+  //   boolean
   userExists : function(user,callback){
     connection.query('SELECT * FROM users WHERE username = ?', [user], function(err,res){
       if (err) throw err;
@@ -182,8 +189,9 @@ module.exports = {
   },
 
   // Testing purposes
-  //gets all users
-  //Returns dictionary of all users
+  // gets all users
+  // Returns:
+  //   dictionary of all users
   getAllUsers : function(){
     connection.query('SELECT * FROM users', function(err,res){
       if (err) throw err;
@@ -192,9 +200,10 @@ module.exports = {
   },
 
   // authentication for logging
-  //Parameter:
-  //user string, pass string
-  //returns boolean if user and pass match with db
+  // Parameters:
+  // user string, pass string
+  // Returns:
+  // boolean if user and pass match with db
   authenticate : function(user,pass,callback){
     connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [user,pass], function(err,res){
       if (err) throw err;
@@ -210,9 +219,10 @@ module.exports = {
   },
 
   // Adds note about a room
-  //Parameters:
-  //room int, notes string
-  //Returns if note is added or it exists
+  // Parameters:
+  //   room int, notes string
+  // Returns:
+  //   if note is added or it exists
   addRoomNote : function(room,notes){
     connection.query('SELECT * FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
       if (err) throw err;
@@ -228,10 +238,11 @@ module.exports = {
     });
   },
 
-  //gets all notes for a room
-  //Parameter:
-  //room int
-  //Returns dictionary of notes
+  // Gets all notes for a room
+  // Parameters:
+  //   room int
+  // Returns:
+  //   dictionary of notes
   getRoomNotes : function(room){
     connection.query('SELECT * FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
       if (err) throw err;
@@ -240,10 +251,11 @@ module.exports = {
   },
 
 
-  //deletes a room note
-  //Parameter:
-  //room string
-  //Returns if data is deleted
+  // Deletes a room note
+  // Parameters:
+  //   room string
+  // Returns:
+  //   if data is deleted
   deleteRoomNote : function(room){
     connection.query('DELETE FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
       if (err) throw err;
@@ -251,10 +263,11 @@ module.exports = {
     });
   },
 
-  //updates note for room
-  //Parameter:
-  //room int, note string
-  //Returns updated room
+  // Updates note for room
+  // Parameters:
+  //   room int, note string
+  // Returns:
+  //   updated room
   updateRoomNote : function(room, note){
     connection.query('UPDATE classrooms SET note = ? WHERE roomNumber = ?', [note,room], function(err){
       if (err) throw err;
@@ -262,7 +275,7 @@ module.exports = {
     });
   },
 
-  //Resets table database
+  // Resets table database
   reset : function(){
     connection.query('DROP TABLE comps');
     connection.query('DROP TABLE users');

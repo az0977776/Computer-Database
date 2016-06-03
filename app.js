@@ -34,6 +34,16 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// sessions
+var session = require("client-sessions");
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'applekim.thunderbird',
+  duration: 30 * 60 * 1000, // idle time until logout
+  activeDuration: 5 * 60 * 1000, // updates time until logout
+}));
+
 // generated
 app.use('/', routes);
 app.use('/users', users);
