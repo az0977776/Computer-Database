@@ -1,26 +1,20 @@
 var express = require('express');
 var router = express.Router();
-//var database = require("./database");
+var database = require("../databaseModule.js");
 
 
 /* GET room page. */
 router.get('/:room', function(req, res, next) {
-
-    console.log(req.params);
+    
+    database.init();
+    var computers = database.getAllCompInRoom(req.params['room']);
+    
+    res.send(computers);
 
 
     res.render('room', req.params)
 
-    //var mysql      = require('mysql');
-    //var connection = mysql.createConnection({
-    //    host     : 'localhost',
-    //    user     : 'user',
-    //    password : 'pass',
-    //    database : 'labs'
-    //});
-    //connection.connect();
-
-    //connection.end();
+    
 });
 
 module.exports = router;

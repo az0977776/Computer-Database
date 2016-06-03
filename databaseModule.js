@@ -129,7 +129,21 @@ module.exports = {
       console.log(res);
     });
   },
-
+  
+  //Add issues
+  addIssues : function(computerID, issueLevel, issue){
+    connection.query('UPDATE comps set issueLevel = ?, description = ? WHERE computerID = ?', [issueLevel, issue, computerID], function(err){
+      if (err) throw err;
+      console.log('Updated description for computer ' + computerID);
+    });
+  },
+  
+  addCoord : function(computerID, x, y){
+    connection.query('UPDATE comps set xcor = ?, ycor = ? WHERE computerID = ?', [x, y, computerID], function(err){
+      if (err) throw err;
+      console.log('Updated coordinates for computer ' + computerID);
+    });
+  }, 
 
   // User database
   //Parameters:

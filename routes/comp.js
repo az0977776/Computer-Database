@@ -8,7 +8,7 @@ router.get('/:name', function(req, res, next) {
     
     var requestDictionary = req.params; 
     requestDictionary['message'] = 'grabbing data from database';
-     
+    
     res.render('comp', requestDictionary)
     
     //var mysql      = require('mysql');
