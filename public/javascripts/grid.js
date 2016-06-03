@@ -60,8 +60,9 @@ var Computer = function(CompDictionary) {
     };
 };
 
-var populateRoom = function(){
+var populateRoom = function(room){
   //goes through database and create a room object with computers
+  getDatabase(room);
   var newComp;
   //populate from the database
   for (var i = 0; i < databaseComp.length; i++) {
@@ -71,4 +72,3 @@ var populateRoom = function(){
 
 };
 
-populateRoom();

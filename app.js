@@ -19,9 +19,6 @@ var room = require('./routes/room');
 var comp = require('./routes/comp');
 var edit = require('./routes/edit');
 
-//sessions
-var session = require("client-sessions");
-
 var app = express();
 
 // view engine setup
@@ -36,14 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-
-//session
-app.use(session({
-  cookieName: 'session',
-  secret: 'applekim.thunderbird',
-  duration: 30 * 60 * 1000,//idle time until logout
-  activeDuration: 5 * 60 * 1000,//updates time until logout
-}));
 
 // generated
 app.use('/', routes);
