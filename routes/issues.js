@@ -10,16 +10,15 @@ router.get('/', function(req, res, next) {
   if (req.session.username) {
     res.render('issues',
     {issues: [
-      {"name": "cslab-1-9", "description": "SSH not working.", "level": 0},
-      {"name": "cslab-1-10", "description": "Internet not working.", "level": 1},
-      {"name": "cslab-1-11", "description": "Screen was cracked in half.", "level": 2},
-      {"name": "cslab-1-15", "description": "Login not working.", "level": 2}
+      {"computerID": "cslab-1-9", "description": "SSH not working.", "issueLevel": 0},
+      {"computerID": "cslab-1-10", "description": "Internet not working.", "issueLevel": 1},
+      {"computerID": "cslab-1-11", "description": "Screen was cracked in half.", "issueLevel": 2},
+      {"computerID": "cslab-1-15", "description": "Login not working.", "issueLevel": 2}
     ]});
   }
   else {
     res.redirect('login');
   }
-
 
 });
 

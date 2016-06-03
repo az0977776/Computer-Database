@@ -7,7 +7,7 @@ block content
       - each issue in issues
         - counter++;
         li.collection-item.avatar.indigo.lighten-5(id="li" + counter.toString())
-          - var level = parseInt(issue.level) + 1;
+          - var level = parseInt(issue.issueLevel) + 1;
           case level
             when 1
               i.material-icons.circle.green
@@ -16,7 +16,7 @@ block content
             default
               i.material-icons.circle.red
           span.title 
-            b #{issue.name}
+            b #{issue.computerID}
           p Description: #{issue.description}
           p Severity: #{level}
           a(class="modal-trigger modal-close" href="#modal1").secondary-content

@@ -123,7 +123,6 @@ module.exports = {
     });
   },
 
-
   // Gets all computers with specified issue level
   // Returns:
   //   dictionary of all computer data with a issue

@@ -36,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // sessions
 var session = require("client-sessions");
-
 app.use(session({
   cookieName: 'session',
   secret: 'applekim.thunderbird',
