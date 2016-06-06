@@ -7,12 +7,29 @@ var database = require("../databaseModule.js");
 router.get('/:room', function(req, res, next) {
     database.init();
     database.getAllCompInRoom(req.params['room'], function(data){
-        console.log('whoa');
-        console.log(req.params['room']);
-        console.log(data[0]);
-        console.log(data[0]['OS']);
+        var i;
+        for (i = 0; i < data.length; i++) {
+            data[i] = JSON.stringify(data[i]);
+        }
         var output = req.params;
-        output['computers'] = data;
+        
+        var tempArray = [];
+        var tempString = "[";
+        
+        var k;
+        for (k = 0; k < data.length; k++) {
+            tempArray.push(data[k]);
+        }
+
+        var j;
+        for (j = 0; j < tempArray.length; j++) {
+            tempString += tempArray[j];
+            tempString += ", ";
+        }
+        tempString+= "]";
+        //console.log(tempString);
+        
+        output['computers'] = tempString;
         res.render('room', output);
     });
 });

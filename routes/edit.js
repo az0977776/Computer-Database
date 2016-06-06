@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
 
   if(!check.test(req.body.id)){
     console.log('here');
-    res.render('edit', {error: "Error: ID not in correct format! e.g. 'cslab1-5'"})
+    res.render('edit', {error: "Error: ID not in correct format! e.g. 'cslab1-5'"});
   }
   else if(req.body.fill == "") {
     res.render('edit', {error: "Error: No Description Entered For Issues!"});

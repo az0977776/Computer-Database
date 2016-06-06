@@ -113,8 +113,18 @@ module.exports = {
       }
     });
   },
-
-
+  
+  //Get data for a computer
+  //Parameter:
+  //computerID string
+  //Return dictionary of data of computer
+  getComp : function(computerID, callback){
+    connection.query('SELECT * FROM comps WHERE computerID = ?', [computerID], function(err,res){
+      if (err) throw err;
+      callback(res);
+    });
+  },
+  
   //Gets all computers
   //Returns dictionary of all computer data
   getAllComp : function(){

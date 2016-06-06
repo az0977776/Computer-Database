@@ -3,4 +3,62 @@ extends layout
 block content
   div.container
     h1 Comp #{name}
-    p #{message}
+    
+    div.row
+    form.col.s6.offset-s3(method="POST")
+      if error
+        div.container
+          ul.collection.with-header
+            li.collection-header.indigo.lighten-5
+              big #{error}
+      div.row
+        div.input-field.col.s6
+          input(id='room',name="room" type="text" class="validate" value=' ')
+          label(for="room" class="active") Room
+          
+          
+      div.row
+        div.input-field.col.s6
+          input(name="compid" type="text" class="validate" value='')
+          label(for="compid" class="active") Computer ID
+          
+      div.row
+        div.input-field.col.s6
+          input(name="ipaddr" type="text" class="validate" value='')
+          label(for="ipaddr" class="active") IP Address
+      
+      div.row
+        div.input-field.col.s6
+          input(name="type" type="text" class="validate" value='')
+          label(for="type" class="active") Brand
+      
+      div.row
+        div.input-field.col.s6
+          input(name="os" type="text" class="validate" value='')
+          label(for="os" class="active") Operating System
+          
+      div.row
+        div.input-field.col.s6
+          input(name="installdate" type="text" class="validate" value='')
+          label(for="installdate" class="active") Installation Date
+          
+      div.row
+        div.input-field.col.s6
+          input(name="lastupdated" type="text" class="validate" value='')
+          label(for="lastupdated" class="active") Last Updated Date
+      
+      div.row
+          div.input-field.col.s12
+            select(name="working")
+              option(value="" disabled selected) Choose yes or no
+              option(value="0") Yes
+              option(value="1") No
+            label Working
+      
+      div.row
+        div.input-field.col.s12
+          textarea.materialize-textarea(name="descript", value='')
+          label(for="descript") Description
+      
+      div.row
+        button.btn.waves-effect.waves-light(type="submit" name="action") Update Computer
