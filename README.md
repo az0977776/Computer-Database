@@ -23,6 +23,7 @@ Installing the Project Itself:
 git clone https://github.com/az0977776/Computer-Database.git
 cd Computer-Database
 make
+mysql -u computers -p Uf7EZ262MtLDUmWc labs < labs.sql
 ```
 
 ## What we did
