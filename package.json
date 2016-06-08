@@ -75,6 +75,7 @@
     "ms": "^0.7.1",
     "mysql": "^2.10.2",
     "negotiator": "^0.6.1",
+    "nodemon": "^1.9.2",
     "on-finished": "^2.3.0",
     "on-headers": "^1.0.1",
     "optimist": "^0.6.1",

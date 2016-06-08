@@ -152,7 +152,7 @@ database.addCoord("cslab2-20", 4, 4);
 database.addCoord("cslab2-19", 4, 5);
 
 database.addCoord("cslab2-28", 6, 2);
-database.addCoord("cslab-2-27", 6, 3);
+database.addCoord("cslab-2-27", 6, 3);//not a typo
 database.addCoord("cslab2-26", 6, 4);
 database.addCoord("cslab2-25", 6, 5);
 
