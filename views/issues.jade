@@ -31,15 +31,38 @@ block content
       
   // Show Confirm Modal When "X" Button is Clicked; Remove Div if Confirmed  
   script.
+    function post(path, params, method) {
+      method = method || "post"; // Set method to post by default if not specified.
+
+      // The rest of this code assumes you are not using a library.
+      // It can be made less wordy if you use one.
+      var form = document.createElement("form");
+      form.setAttribute("method", method);
+      form.setAttribute("action", path);
+
+      for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", params[key]);
+
+          form.appendChild(hiddenField);
+         }
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+    
     var store = null;
     var id = null;
     $(".modal-trigger").click(function(){
       store = "#" + $(this).parent().closest('li').attr('id');
-      id = $(this).parent().span('li');
+      id = $(this).parent().closest('li').find('span').text();
       $('#check').openModal();
     });
     $("#confirm").click(function(){
       console.log(id);
-      console.log("confirmed");
-      $(store).remove();
+      post("/issues", {computerID: id});
     });

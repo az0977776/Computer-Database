@@ -4,7 +4,6 @@ var router = express.Router();
 var app = express();
 var database = require("../databaseModule.js");
 /* GET room page. */
-console.log('ho');
 
 var requestDictionary={};
 
@@ -81,7 +80,7 @@ router.post('/:name', function(req, res, next) {
     var roomcheck = /[\d]/;
     var compidcheck = /cslab[\d]*-[\d]+/;
     var ipcheck = /[\d].[\d].[\d].[\d]/;
-    var datecheck = /[\d]-[\d]-[\d]/;
+    var datecheck = /[\d]+-[\d]+-[\d]+/;
     var whiteSpaceCheck= /\s*/;
 
     if(!roomcheck.test(room)){
@@ -121,7 +120,9 @@ router.post('/:name', function(req, res, next) {
             descript=prevDescript;
         }
         
+        requestDictionary['error']="Computer updated!";
         database.updateComp(room,compid,ipAddr,xcor,ycor,type,os,installDate,lastupdated,working,issue,descript);
+        res.render("comp",requestDictionary);
     }
 });
 module.exports = router;

@@ -16,7 +16,22 @@ router.get('/', function(req, res, next) {
   else {
     res.redirect('login');
   }
+});
 
+/* POST issues page. */
+router.post('/', function(req, res, next) {
+  var id = req.body.computerID;
+  id = id.trim();
+  
+  console.log(id);
+  
+  var database = require('../databaseModule.js');
+  database.init();
+  database.removeIssue(id);
+  database.getAllIssues(function(ret){
+    res.render('issues',
+    {issues: ret});
+  });
 });
 
 module.exports = router;
