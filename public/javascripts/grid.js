@@ -23,7 +23,10 @@ var Computer = function(CompDictionary) {
     var ycor = CompDictionary['ycor']*($(window).width()/20 + 10);//depends on index in the grid
     var color = issueColors[CompDictionary['issueLevel']];
     var name = CompDictionary['computerID'];
-    var infoString = CompDictionary['computerID'];
+    var infoString = CompDictionary['computerID']
+    if (infoString.slice(0,5) == "cslab") {
+        infoString = infoString.slice(5,infoString.length);
+    }
 
     var compLink = document.createElementNS("http://www.w3.org/2000/svg", "a");
     compLink.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', "/comp/" + CompDictionary['computerID']);
@@ -39,13 +42,16 @@ var Computer = function(CompDictionary) {
     comp.setAttribute("stroke", "black");
     comp.setAttribute("stroke-width", 5);
     comp.setAttribute("opacity", 0.7);
-    comp.setAttribute("class", "tooltip");
+    //comp.setAttribute("class", "tooltip");
 
     var compInfo = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    compInfo.setAttribute("class", "tooltiptext");
-    compInfo.setAttribute("x",xcor + 15);
-    compInfo.setAttribute("y",ycor + 30);
+    //compInfo.setAttribute("class", "tooltiptext");
+    compInfo.setAttribute("x",xcor + $(window).width()/40);
+    compInfo.setAttribute("y",ycor + $(window).width()/40);
+    compInfo.setAttribute("text-anchor", "middle");
     compInfo.setAttribute("fill","black");
+    compInfo.setAttribute("font-family", "Verdana");
+    compInfo.setAttribute("font-weight", "bold");
     compInfo.setAttribute("pointer-events","none");
     compInfo.innerHTML = infoString;
 
@@ -67,7 +73,7 @@ var populateRoom = function(){
     var newComp;
     //populate from the database
     for (var i = 0; i < databaseComp.length; i++) {
-        console.log("loop");
+        //console.log("loop");
         newComp = Computer(databaseComp[i]);
     }
 };

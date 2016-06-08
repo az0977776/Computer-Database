@@ -13,51 +13,51 @@ block content
               big #{error}
       div.row
         div.input-field.col.s6
-          input(id='room',name="room" type="text" class="validate" value=' ')
+          input(id='room',name="room" type="text" class="validate" value="#{room}")
           label(for="room" class="active") Room
           
           
       div.row
         div.input-field.col.s6
-          input(name="compid" type="text" class="validate" value='')
+          input(name="compid" type="text" class="validate" value='#{compid}')
           label(for="compid" class="active") Computer ID
           
       div.row
         div.input-field.col.s6
-          input(name="ipaddr" type="text" class="validate" value='')
+          input(name="ipaddr" type="text" class="validate" value='#{ip}')
           label(for="ipaddr" class="active") IP Address
       
       div.row
         div.input-field.col.s6
-          input(name="type" type="text" class="validate" value='')
+          input(name="type" type="text" class="validate" value='#{type}')
           label(for="type" class="active") Brand
       
       div.row
         div.input-field.col.s6
-          input(name="os" type="text" class="validate" value='')
+          input(name="os" type="text" class="validate" value='#{os}')
           label(for="os" class="active") Operating System
           
       div.row
         div.input-field.col.s6
-          input(name="installdate" type="text" class="validate" value='')
+          input(name="installdate" type="text" class="validate" value='#{install}')
           label(for="installdate" class="active") Installation Date
           
       div.row
         div.input-field.col.s6
-          input(name="lastupdated" type="text" class="validate" value='')
+          input(name="lastupdated" type="text" class="validate" value='#{updated}')
           label(for="lastupdated" class="active") Last Updated Date
       
       div.row
           div.input-field.col.s12
             select(name="working")
               option(value="" disabled selected) Choose yes or no
-              option(value="0") Yes
-              option(value="1") No
+              option(value="Y") Yes
+              option(value="N") No
             label Working
       
       div.row
         div.input-field.col.s12
-          textarea.materialize-textarea(name="descript", value='')
+          textarea.materialize-textarea(name="descript", value='#{descript}')
           label(for="descript") Description
       
       div.row

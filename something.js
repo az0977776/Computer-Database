@@ -30,7 +30,7 @@ database.init();
 
 
 database.getAllComp();
-
+database.getAllIssues()
 //database.reset();
 //database.getAllUsers();
 

@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   database.init();
   console.log("SESSION" + req.session.username);
   if (req.session.username) {
-    var rooms = ["307","329","255","234"];
+    var rooms = ["251","307","325","451"];
     res.render('computers', {"rooms": rooms});
   }
   else {

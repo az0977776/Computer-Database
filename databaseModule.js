@@ -127,11 +127,11 @@ module.exports = {
   
   //Gets all computers
   //Returns dictionary of all computer data
-  getAllComp : function(){
+  getAllComp : function(callback){
     connection.query('SELECT * FROM comps', function(err,res){
       if (err) throw err;
       console.log('Data of all computers:\n');
-      console.log(res);
+      callback.log(res);
     });
   },
 
@@ -150,28 +150,37 @@ module.exports = {
 
   // Gets all computers with specified issue level
   //Returns dictionary of all computer data with a issue
-  getIssues : function(issueLevel){
+  getIssues : function(issueLevel, callback){
     connection.query('SELECT * FROM comps WHERE issueLevel = ?', [issueLevel], function(err, res){
       if (err) throw err;
       console.log('Data for all computers with issue level ' + issueLevel + '\n');
-      console.log(res);
+      callback.log(res);
     });
   },
   
   //Gets all issues
-  getAllIssues : function(){
-    connection.query('SELECT * FROM comps WHERE issueLevel != ?', [null], function(err,res){
+  getAllIssues : function(callback){
+    connection.query('SELECT * FROM comps WHERE issueLevel IS NOT null', function(err,res){
       if (err) throw err;
       console.log('All issues:\n');
-      console.log(res);
+      //console.log(res)
+      callback(res);
     });
   },
   
   //Add issues
   addIssues : function(computerID, issueLevel, issue){
-    connection.query('UPDATE comps set issueLevel = ?, description = ? WHERE computerID = ?', [issueLevel, issue, computerID], function(err){
+    connection.query('UPDATE comps SET issueLevel = ?, description = ? WHERE computerID = ?', [issueLevel, issue, computerID], function(err){
+    if (err) throw err;
+    console.log('Updated description for computer ' + computerID);
+    });
+  },
+  
+  //remove issues
+  removeIssue : function(computerID){
+    connection.query('UPDATE comps SET issueLevel = ?, description = ? WHERE computerID = ?', [null, '', computerID], function(err){
       if (err) throw err;
-      console.log('Updated description for computer ' + computerID);
+      console.log('Removed issue');
     });
   },
   
@@ -221,10 +230,10 @@ module.exports = {
   // Testing purposes
   //gets all users
   //Returns dictionary of all users
-  getAllUsers : function(){
+  getAllUsers : function(callback){
     connection.query('SELECT * FROM users', function(err,res){
       if (err) throw err;
-      console.log(res);
+      callback(res);
     });
   },
 
@@ -269,10 +278,10 @@ module.exports = {
   //Parameter:
   //room int
   //Returns dictionary of notes
-  getRoomNotes : function(room){
+  getRoomNotes : function(room, callback){
     connection.query('SELECT * FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
       if (err) throw err;
-      console.log(res);
+      callback(res);
     });
   },
 

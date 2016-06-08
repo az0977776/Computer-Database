@@ -32,11 +32,14 @@ block content
   // Show Confirm Modal When "X" Button is Clicked; Remove Div if Confirmed  
   script.
     var store = null;
+    var id = null;
     $(".modal-trigger").click(function(){
       store = "#" + $(this).parent().closest('li').attr('id');
+      id = $(this).parent().span('li');
       $('#check').openModal();
     });
     $("#confirm").click(function(){
+      console.log(id);
       console.log("confirmed");
       $(store).remove();
     });

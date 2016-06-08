@@ -5,13 +5,47 @@ var app = express();
 var database = require("../databaseModule.js");
 /* GET room page. */
 console.log('ho');
+
+var requestDictionary={};
+
+var prevRoom,prevCompid,prevIpAddr,prevType,prevOS,prevInstallDate,prevLastupdated,prevWorking,prevDescript,prevXcor,prevYcor,prevIssue;
+
 router.get('/:name', function(req, res, next) {
 
-    var requestDictionary = req.params;
+    requestDictionary = req.params;
     
-    res.render('comp', requestDictionary);
 
+    database.getComp(req.params['name'], function(data){
+        
+        prevRoom=data[0]["room"];
+        prevCompid=data[0]["computerID"];
+        prevIpAddr=data[0]["ip"];
+        prevXcor=data[0]['xcor'];
+        prevYcor=data[0]['ycor'];
+        prevType=data[0]['type'];
+        prevInstallDate=data[0]['installation'];
+        prevOS=data[0]['os'];
+        prevLastupdated=data[0]['updated'];
+        prevDescript=data[0]['description'];
+        prevWorking=data[0]['working'];
+        prevIssue=data[0]['issue'];
+
+        req.params["room"]=prevRoom;
+        req.params["compid"]=prevCompid;
+        req.params["ip"]=prevIpAddr;
+        req.params["type"]=prevType;
+        req.params["os"]=prevOS;
+        req.params["install"]=prevInstallDate;
+        req.params["updated"]=prevLastupdated;
+        req.params["descript"]=prevDescript;
+
+        
+        res.render('comp', requestDictionary);
+    });
     
+    console.log(prevRoom);
+    
+
     //var mysql      = require('mysql');
     //var connection = mysql.createConnection({
     //    host     : 'localhost',
@@ -20,6 +54,7 @@ router.get('/:name', function(req, res, next) {
     //    database : 'labs'
     //});
     //connection.connect();
+    console.log(req.params,"po",prevRoom);
 
 
     //connection.end();
@@ -27,20 +62,7 @@ router.get('/:name', function(req, res, next) {
 
 router.post('/:name', function(req, res, next) {
     
-    console.log(req.body.room);
-    console.log(req.body.compid);
-    console.log(req.body.ipaddr);
-    console.log(req.body.type);
-    console.log(req.body.os);
-    console.log(req.body.installdate);
-    console.log(req.body.lastupdated);
-    console.log(req.body.working);
-    console.log(req.body.descript);
 
-    database.getComp(req.params['name'], function(data){
-        console.log(data);
-
-    });
     //document.getElementById('room').setAttribute('value', 'lol');
     var room = req.body.room;
     var compid = req.body.compid;
@@ -52,34 +74,54 @@ router.post('/:name', function(req, res, next) {
     var working = req.body.working;
     var descript = req.body.descript;
     
+    var xcor=prevXcor;
+    var issue=prevIssue;
+    var ycor=prevYcor;
+
     var roomcheck = /[\d]/;
     var compidcheck = /cslab[\d]*-[\d]+/;
     var ipcheck = /[\d].[\d].[\d].[\d]/;
     var datecheck = /[\d]-[\d]-[\d]/;
-    
+    var whiteSpaceCheck= /\s*/;
+
     if(!roomcheck.test(room)){
-        res.render('comp', {error: "Error: Room not in correct format! e.g. 312 "});
+        requestDictionary['error']="Error: Room not in correct format! e.g. 312 ";
+        res.render('comp', requestDictionary);
     }
     else if(!compidcheck.test(compid)){
-        res.render('comp', {error: "Error: Computer ID not in correct format! e.g. 'cslab1-5'"});
+        requestDictionary['error']="Error: Computer ID not in correct format! e.g. 'cslab1-5'";
+        res.render('comp', requestDictionary);
     }
     else if(!ipcheck.test(ipAddr)){
-        res.render('comp', {error: "Error: IP Address not in correct format! e.g. 149.89.150.100"});
+        requestDictionary['error']="Error: IP Address not in correct format! e.g. 149.89.150.100";
+        res.render('comp', requestDictionary);
     }
-    else if(!datecheck.test(installDate)){
-        res.render('comp', {error: "Error: Install Date format incorrect! e.g. 2009-10-31"});
+    else if(!datecheck.test(installDate)&&installDate!='null'){
+        requestDictionary['error']="Error: Install Date format incorrect! e.g. 2009-10-31";
+        res.render('comp', requestDictionary);
     }
-    else if(!datecheck.test(lastupdated)){
-        res.render('comp', {error: "Error: Update Date format incorrect! e.g. 2009-10-31"});
+    else if(!datecheck.test(lastupdated)&&lastupdated!='null'){
+        requestDictionary['error']="Error: Update Date format incorrect! e.g. 2009-10-31";
+        res.render('comp', requestDictionary);
     }
     else if(working==undefined){
-        res.render('comp', {error: "Error: Working Not Defined"});
+        requestDictionary['error']="Error: Working Not Defined";
+        res.render('comp', requestDictionary);
     }
     else{
-        var xcor,ycor = 0;
-        var issue = 0
+        if(whiteSpaceCheck.test(type)){
+            type=prevType;
+        }
+        
+        if(whiteSpaceCheck.test(os)){
+            os=prevOS;
+        }
+        
+        if(whiteSpaceCheck.test(descript)){
+            descript=prevDescript;
+        }
+        
         database.updateComp(room,compid,ipAddr,xcor,ycor,type,os,installDate,lastupdated,working,issue,descript);
     }
 });
-
 module.exports = router;

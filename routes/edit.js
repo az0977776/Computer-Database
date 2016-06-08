@@ -37,8 +37,10 @@ router.post('/', function(req, res, next) {
     var database = require('../databaseModule.js');
     database.init();
     database.compExists(req.body.id, function(message){
+      console.log("MESSAGE: " + message);
       if (message == true) {
         database.addIssues(req.body.id, req.body.level, req.body.fill);
+        res.render('edit', {error: "Added Issue Successfully!"});
       }
       else {
         res.render('edit', {error: "Error: Selected Computer Does Not Exist!"});
