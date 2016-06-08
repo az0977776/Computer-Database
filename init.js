@@ -46,7 +46,6 @@ connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
             + ')', function (err) {
               if (err) throw err;
             });
+        process.exit();
     });
 });
-
-process.exit();
