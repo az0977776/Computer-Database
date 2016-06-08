@@ -1,3 +1,4 @@
 .\~*
 env
 ssh-package
+node_modules
