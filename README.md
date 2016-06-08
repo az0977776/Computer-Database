@@ -1,9 +1,9 @@
-# Computer Lab Overview 
+# Computer Lab Overview
 
 # Overview
 Client: Mr. Dyrland-Weaver
 
-We were assigned with the task of designing a way to keep track of the status of all the computers in school. CS teachers were to be able to view a grid of the computers in each room and view information about them, as well as view a list of all the computers with issues. They were also to be able to add notes that would be collectively viewed by all the teachers. 
+We were assigned with the task of designing a way to keep track of the status of all the computers in school. CS teachers were to be able to view a grid of the computers in each room and view information about them, as well as view a list of all the computers with issues. They were also to be able to add notes that would be collectively viewed by all the teachers.
 
 
 ## Installation
@@ -23,7 +23,6 @@ Installing the Project Itself:
 git clone https://github.com/az0977776/Computer-Database.git
 cd Computer-Database
 make
-mysql -u computers -p Uf7EZ262MtLDUmWc labs < labs.sql
 ```
 
 ## What we did

@@ -39,7 +39,7 @@ block content
           div.modal-footer
             a(href="#" class="modal-action modal-close waves-effect waves-red btn-flat") Cancel
             a(href="/comp/" + issue.computerID class="modal-action modal-close waves-effect waves-green btn-flat") Edit
-            a(href="#" id="confirm" class="modal-action modal-close waves-effect waves-green btn-flat") Confirm
+            a(href="#" class="modal-action modal-close waves-effect waves-green btn-flat confirm") Confirm
       
   // Show Confirm Modal When "X" Button is Clicked; Remove Div if Confirmed  
   script.
@@ -74,7 +74,6 @@ block content
       id = $(this).parent().closest('li').find('span').text();
       $(store[0] + store.slice(3)).openModal();
     });
-    $("#confirm").click(function(){
-      console.log(id);
+    $(".confirm").click(function(){
       post("/issues", {computerID: id});
     });

@@ -48,3 +48,5 @@ connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
             });
     });
 });
+
+process.exit();

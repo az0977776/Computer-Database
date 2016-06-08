@@ -19,7 +19,7 @@ module.exports = {
     //Creates database and table if not already made
     connection.query('CREATE DATABASE IF NOT EXISTS labs', function (err) {
         if (err) throw err;
-        console.log('created db');
+        //console.log('created db');
         connection.query('USE labs', function (err) {
             if (err) throw err;
             connection.query('CREATE TABLE IF NOT EXISTS comps('
@@ -95,7 +95,7 @@ module.exports = {
       if (err) throw err;
     });
   },
-  
+
   //Check if computer exists
   //Parameters:
   //computerID string
@@ -110,7 +110,7 @@ module.exports = {
       }
     });
   },
-  
+
   //Get data for a computer
   //Parameter:
   //computerID string
@@ -121,13 +121,13 @@ module.exports = {
       callback(res);
     });
   },
-  
+
   //Gets all computers
   //Returns dictionary of all computer data
   getAllComp : function(callback){
     connection.query('SELECT * FROM comps', function(err,res){
       if (err) throw err;
-      console.log('Data of all computers:\n');
+      //console.log('Data of all computers:\n');
       callback.log(res);
     });
   },
@@ -138,7 +138,7 @@ module.exports = {
   getAllCompInRoom : function(room, callback){
     connection.query('SELECT * FROM comps WHERE room = ?', [room], function(err, res){
       if (err) throw err;
-      console.log('Data for all computers in room ' + room + '\n');
+      //console.log('Data for all computers in room ' + room + '\n');
       //console.log(res);
       callback(res);
     });
@@ -154,7 +154,7 @@ module.exports = {
       callback(res);
     });
   },
-  
+
   //Gets all issues
   getAllIssues : function(callback){
     connection.query('SELECT * FROM comps WHERE issueLevel IS NOT null', function(err,res){
@@ -164,29 +164,29 @@ module.exports = {
       callback(res);
     });
   },
-  
+
   //Add issues
   addIssues : function(computerID, issueLevel, issue){
     connection.query('UPDATE comps SET issueLevel = ?, description = ? WHERE computerID = ?', [issueLevel, issue, computerID], function(err){
     if (err) throw err;
-    console.log('Updated description for computer ' + computerID);
+    //console.log('Updated description for computer ' + computerID);
     });
   },
-  
+
   //remove issues
   removeIssue : function(computerID){
     connection.query('UPDATE comps SET issueLevel = ?, description = ? WHERE computerID = ?', [null, '', computerID], function(err){
       if (err) throw err;
-      console.log('Removed issue');
+      //console.log('Removed issue');
     });
   },
-  
+
   addCoord : function(computerID, x, y){
     connection.query('UPDATE comps set xcor = ?, ycor = ? WHERE computerID = ?', [x, y, computerID], function(err){
       if (err) throw err;
-      console.log('Updated coordinates for computer ' + computerID);
+      //console.log('Updated coordinates for computer ' + computerID);
     });
-  }, 
+  },
 
   // User database
   //Parameters:
@@ -198,11 +198,11 @@ module.exports = {
       if (res[0] == undefined){
         connection.query('INSERT INTO users SET ?', {username:user, password:pass}, function(err){
           if (err) throw err;
-          console.log('Added user ' + user);
+          //console.log('Added user ' + user);
         });
       }
       else{
-        console.log('User already exists');
+        //console.log('User already exists');
       }
     });
   },
@@ -215,10 +215,10 @@ module.exports = {
     connection.query('SELECT * FROM users WHERE username = ?', [user], function(err,res){
       if (err) throw err;
       if (res[0] == undefined){
-        console.log('false');
+        //console.log('false');
         callback(false);
       } else{
-        console.log('true');
+        //console.log('true');
         callback(true);
       }
     });
@@ -259,11 +259,11 @@ module.exports = {
       if (res[0] == undefined){
         connection.query('INSERT INTO classrooms SET ?', {roomNumber:room, notes:notes},function(err){
           if (err) throw err;
-          console.log('Added note');
+          //console.log('Added note');
         });
       }
       else{
-        console.log('Room already has notes');
+        //console.log('Room already has notes');
       }
     });
   },
@@ -287,7 +287,7 @@ module.exports = {
   deleteRoomNote : function(room){
     connection.query('DELETE FROM classrooms WHERE roomNumber = ?', [room], function(err,res){
       if (err) throw err;
-      console.log('Deleted ' + res.affectedRows + ' rows');
+      //console.log('Deleted ' + res.affectedRows + ' rows');
     });
   },
 
@@ -298,7 +298,7 @@ module.exports = {
   updateRoomNote : function(room, note){
     connection.query('UPDATE classrooms SET note = ? WHERE roomNumber = ?', [note,room], function(err){
       if (err) throw err;
-      console.log('Updated note for room ' + room);
+      //console.log('Updated note for room ' + room);
     });
   },
 
@@ -307,6 +307,6 @@ module.exports = {
     connection.query('DROP TABLE comps');
     connection.query('DROP TABLE users');
     connection.query('DROP TABLE classrooms');
-    console.log('RESET TABLES');
+    //console.log('RESET TABLES');
   }
 };
