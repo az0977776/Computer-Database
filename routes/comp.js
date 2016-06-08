@@ -15,7 +15,6 @@ router.get('/:name', function(req, res, next) {
     
 
     database.getComp(req.params['name'], function(data){
-        
         prevRoom=data[0]["room"];
         prevCompid=data[0]["computerID"];
         prevIpAddr=data[0]["ip"];
@@ -29,7 +28,6 @@ router.get('/:name', function(req, res, next) {
         prevIssue=data[0]['issueLevel'];
 
         req.params["room"]=prevRoom;
-        req.params["compid"]=prevCompid;
         req.params["ip"]=prevIpAddr;
         req.params["type"]=prevType;
         req.params["os"]=prevOS;
@@ -60,11 +58,7 @@ router.get('/:name', function(req, res, next) {
 });
 
 router.post('/:name', function(req, res, next) {
-    
-
-    //document.getElementById('room').setAttribute('value', 'lol');
     var room = req.body.room;
-    var compid = req.body.compid;
     var ipAddr = req.body.ipaddr;
     var type = req.body.type;
     var os = req.body.os;
@@ -73,22 +67,18 @@ router.post('/:name', function(req, res, next) {
     var working = req.body.working;
     var descript = req.body.descript;
     
+    var compid = prevCompid;
     var xcor=prevXcor;
     var issue=prevIssue;
     var ycor=prevYcor;
 
     var roomcheck = /[\d]/;
-    var compidcheck = /cslab[\d]*-[\d]+/;
     var ipcheck = /[\d].[\d].[\d].[\d]/;
     var datecheck = /[\d]+-[\d]+-[\d]+/;
     var whiteSpaceCheck= /\s*/;
 
     if(!roomcheck.test(room)){
         requestDictionary['error']="Error: Room not in correct format! e.g. 312 ";
-        res.render('comp', requestDictionary);
-    }
-    else if(!compidcheck.test(compid)){
-        requestDictionary['error']="Error: Computer ID not in correct format! e.g. 'cslab1-5'";
         res.render('comp', requestDictionary);
     }
     else if(!ipcheck.test(ipAddr)){
@@ -101,10 +91,6 @@ router.post('/:name', function(req, res, next) {
     }
     else if(!datecheck.test(lastupdated)&&lastupdated!='null'){
         requestDictionary['error']="Error: Update Date format incorrect! e.g. 2009-10-31";
-        res.render('comp', requestDictionary);
-    }
-    else if(working==undefined){
-        requestDictionary['error']="Error: Issue Level Not Defined";
         res.render('comp', requestDictionary);
     }
     else{

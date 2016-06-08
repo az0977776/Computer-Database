@@ -1,7 +1,14 @@
 extends layout
 block content
   div.container
-    h1 Issues        
+    h1 Issues   
+    ul
+      li 
+        big Number of Mild Issues: #{zero}
+      li 
+        big Number of Moderate Issues: #{one}
+      li 
+        big Number of Serious Issues: #{two}
     ul.collection.with-header
       - var counter = 0;
       - each issue in issues

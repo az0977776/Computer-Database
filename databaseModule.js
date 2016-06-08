@@ -1,8 +1,8 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'user',
-  password : 'pass',
+  user     : 'computers',
+  password : 'Uf7EZ262MtLDUmWc',
   database : 'labs'
 });
 
@@ -64,11 +64,11 @@ module.exports = {
       if (res[0] == undefined){
         connection.query('INSERT INTO comps SET ?', {room:room, computerID:computerID, ip:ip, xcor:xcor, ycor:ycor, type:type, OS:OS, installation:installation, updated:updated, working:working, issueLevel:issueLevel, description:description}, function(err){
           if (err) throw err;
-          console.log('Added computer');
+          //console.log('Added computer');
         });
       }
       else{
-        console.log('Computer already exists');
+        //console.log('Computer already exists');
       }
     });
   },
@@ -150,8 +150,8 @@ module.exports = {
   getIssues : function(issueLevel, callback){
     connection.query('SELECT * FROM comps WHERE issueLevel = ?', [issueLevel], function(err, res){
       if (err) throw err;
-      console.log('Data for all computers with issue level ' + issueLevel + '\n');
-      callback.log(res);
+      //console.log('Data for all computers with issue level ' + issueLevel + '\n');
+      callback(res);
     });
   },
   
@@ -159,7 +159,7 @@ module.exports = {
   getAllIssues : function(callback){
     connection.query('SELECT * FROM comps WHERE issueLevel IS NOT null', function(err,res){
       if (err) throw err;
-      console.log('All issues:\n');
+      //console.log('All issues:\n');
       //console.log(res)
       callback(res);
     });

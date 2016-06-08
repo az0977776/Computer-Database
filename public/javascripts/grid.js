@@ -10,11 +10,6 @@ var Computer = function(CompDictionary) {
         CompDictionary["issueLevel"] = 0;
     }
     
-    if (CompDictionary["computerID"] == "homer") {
-        CompDictionary["xcor"] = 0;
-        CompDictionary["ycor"] = 8;
-    }
-
     var issueColors = ["green","yellow","red"];//list of possible colors
 
     var width = $(window).width()/20;//might depend on screen height

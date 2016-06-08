@@ -123,40 +123,43 @@ database.addCoord("cslab4-131", 7, 4);
 database.addCoord("cslab4-132", 7, 5);
 database.addCoord("marge", 7, 6);
 
-database.addCoord("cslab2-6", , );
-database.addCoord("cslab2-5", , );
-database.addCoord("cslab2-4", , );
-database.addCoord("cslab2-3", , );
-database.addCoord("cslab2-2", , );
-database.addCoord("cslab2-1", , );
+database.addCoord("cslab2-6", 0, 0);
+database.addCoord("cslab2-5", 0, 1);
+database.addCoord("cslab2-4", 0, 2);
+database.addCoord("cslab2-3", 0, 3);
+database.addCoord("cslab2-2", 0, 4);
+database.addCoord("cslab2-1", 0, 5);
 
-database.addCoord("cslab2-12", , );
-database.addCoord("cslab2-11", , );
-database.addCoord("cslab2-10", , );
-database.addCoord("cslab2-9", , );
-database.addCoord("cslab2-8", , );
-database.addCoord("cslab2-7", , );
+database.addCoord("cslab2-12", 1, 0);
+database.addCoord("cslab2-11", 1, 1);
+database.addCoord("cslab2-10", 1, 2);
+database.addCoord("cslab2-9", 1, 3);
+database.addCoord("cslab2-8", 1, 4);
+database.addCoord("cslab2-7", 1, 5);
 
-database.addCoord("cslab2-18", , );
-database.addCoord("cslab2-17", , );
-database.addCoord("cslab2-16", , );
-database.addCoord("cslab2-15", , );
-database.addCoord("cslab2-14", , );
-database.addCoord("cslab2-13", , );
+database.addCoord("cslab2-18", 3, 0);
+database.addCoord("cslab2-17", 3, 1);
+database.addCoord("cslab2-16", 3, 2);
+database.addCoord("cslab2-15", 3, 3);
+database.addCoord("cslab2-14", 3, 4);
+database.addCoord("cslab2-13", 3, 5);
 
-database.addCoord("cslab2-24", , );
-database.addCoord("cslab2-23", , );
-database.addCoord("cslab2-22", , );
-database.addCoord("cslab2-21", , );
-database.addCoord("cslab2-20", , );
-database.addCoord("cslab2-19", , );
+database.addCoord("cslab2-24", 4, 0);
+database.addCoord("cslab2-23", 4, 1);
+database.addCoord("cslab2-22", 4, 2);
+database.addCoord("cslab2-21", 4, 3);
+database.addCoord("cslab2-20", 4, 4);
+database.addCoord("cslab2-19", 4, 5);
 
-database.addCoord("cslab2-28", , );
-database.addCoord("cslab2-27", , );
-database.addCoord("cslab2-26", , );
-database.addCoord("cslab2-25", , );
+database.addCoord("cslab2-28", 6, 2);
+database.addCoord("cslab-2-27", 6, 3);
+database.addCoord("cslab2-26", 6, 4);
+database.addCoord("cslab2-25", 6, 5);
 
-database.addCoord("cslab2-32", , );
-database.addCoord("cslab2-31", , );
-database.addCoord("cslab2-30", , );
-database.addCoord("cslab2-29", , );
+database.addCoord("cslab2-32", 7, 2);
+database.addCoord("cslab2-31", 7, 3);
+database.addCoord("cslab2-30", 7, 4);
+database.addCoord("cslab2-29", 7, 5);
+
+database.addCoord("bart", 7,6);
+database.addCoord("homer", 0, 8);

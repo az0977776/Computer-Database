@@ -2,7 +2,7 @@ extends layout
 
 block content
   div.container
-    h1 Computer #{name}
+    h1 #{name}
     
     div.row
     form.col.s6.offset-s3(method="POST")
@@ -11,11 +11,6 @@ block content
           ul.collection.with-header
             li.collection-header.indigo.lighten-5
               big #{error}
-      
-      div.row
-        div.input-field.col.s5
-          input(name="compid" type="text" class="validate" value='#{compid}')
-          label(for="compid" class="active") Computer ID
           
       div.row
         div.input-field.col.s5

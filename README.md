@@ -9,6 +9,16 @@ We were assigned with the task of designing a way to keep track of the status of
 ## Installation
 NodeJS must have been installed prior to installing this. [Download Node](https://nodejs.org/en/download/)
 
+Computer-Lab uses MySQL, and requires an user account for it.
+```sh
+mysql -u root -p
+CREATE USER 'computers'@'localhost' IDENTIFIED BY 'Uf7EZ262MtLDUmWc';
+GRANT ALL PRIVILEGES ON * . * TO 'computers'@'localhost';
+FLUSH PRIVILEGES;
+exit
+```
+
+Installing the Project Itself:
 ```sh
 git clone https://github.com/az0977776/Computer-Database.git
 cd Computer-Database
@@ -23,10 +33,15 @@ make
 - List of computer issues
 
 ## TODO
-- Note Taking System for Rooms
-- Adding New Rooms
-- IP Address for Database
-- Edit / Add New Computers (HTML Page)
+- Note Taking System for Rooms (Darwin)
+- Add New Computers
+- Darwin: Export database
+- Darwin: Add function to get Issues by Room
+- Franklin: Preload SSH Issues
+
+## Installation Stuff
+- Darwin: Export Database
+- Young: Fully Test on Mac
 
 ## Team Roles
 |Person         |Role           |
