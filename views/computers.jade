@@ -3,13 +3,19 @@ extends layout
 block content
   div.container
     h1 Computers
-    ul
+      br
+    div.row
       - each val in rooms
-        - var str = "/room/" + val
-        - var btn = "Room " + val
-        li
-          a(href=str)
-            button.wavs-effect.waves-light.btn #{btn}
-          br
-          br
+        div.col.s3
+          - var str = "/room/" + val
+          - var btn = "Room " + val
+          div(align="center")
+            a(href=str)
+              button.wavs-effect.waves-light.indigo.darken-2.btn #{btn}
+          card
+            div.input-field.col.s12
+              textarea.materialize-textarea(name="descript") (temp)
+              label(for="descript") Notes
+      div(align="center")
+        button.wavs-effect.waves-light.btn Update Notes
         

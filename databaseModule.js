@@ -11,9 +11,9 @@ module.exports = {
   init : function() {
     connection.connect(function(err) {
       if (err) {
-        console.error('error connecting: ' + err.stack);
+        //console.error('error connecting: ' + err.stack);
       }
-      console.log('connected as id ' + connection.threadId);
+      //console.log('connected as id ' + connection.threadId);
     });
 
     //Creates database and table if not already made
@@ -93,7 +93,6 @@ module.exports = {
   updateComp : function(room, computerID, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description){
     connection.query('UPDATE comps SET room = ?, ip = ?, xcor = ?, ycor = ?, type = ?, OS = ?, installation = ?, updated = ?, working = ?, issueLevel = ?, description = ? WHERE computerID = ? ', [room, ip, xcor, ycor, type, OS, installation, updated, working, issueLevel, description, computerID], function(err){
       if (err) throw err;
-      console.log('Updated computer ' + computerID);
     });
   },
   
@@ -105,10 +104,8 @@ module.exports = {
     connection.query('SELECT * FROM comps WHERE computerID = ?', [computerID], function(err,res){
       if (err) throw err;
       if (res[0] == undefined){
-        console.log('false');
         callback(false);
       } else{
-        console.log('true');
         callback(true);
       }
     });
@@ -244,12 +241,9 @@ module.exports = {
   authenticate : function(user,pass,callback){
     connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [user,pass], function(err,res){
       if (err) throw err;
-      console.log(res[0]);
       if (res[0] == undefined){
-        console.log('false');
         callback(false);
       } else{
-        console.log('true');
         callback(true);
       }
     });
@@ -313,6 +307,6 @@ module.exports = {
     connection.query('DROP TABLE comps');
     connection.query('DROP TABLE users');
     connection.query('DROP TABLE classrooms');
-    console.log('reset tables');
+    console.log('RESET TABLES');
   }
 };

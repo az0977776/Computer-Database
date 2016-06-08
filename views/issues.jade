@@ -17,17 +17,22 @@ block content
               i.material-icons.circle.red
           span.title 
             b #{issue.computerID}
-          p Description: #{issue.description}
-          p Severity: #{level}
+          p Room: 
+            i #{issue.room}
+          p Description: 
+            i #{issue.description}
+          p Severity: 
+            i #{level}
           a(class="modal-trigger modal-close" href="#modal1").secondary-content
             i.material-icons close
             
-    div.modal(id="check")
-      div.modal-content
-        p Are you sure this issue has been fixed?
-      div.modal-footer
-        a(href="#" id="confirm" class="modal-action modal-close waves-effect waves-green btn-flat") Confirm
-        a(href="#" class="modal-action modal-close waves-effect waves-red btn-flat") Cancel
+        div.modal(id=counter.toString())
+          div.modal-content
+            p Are you sure this issue has been fixed?
+          div.modal-footer
+            a(href="#" class="modal-action modal-close waves-effect waves-red btn-flat") Cancel
+            a(href="/comp/" + issue.computerID class="modal-action modal-close waves-effect waves-green btn-flat") Edit
+            a(href="#" id="confirm" class="modal-action modal-close waves-effect waves-green btn-flat") Confirm
       
   // Show Confirm Modal When "X" Button is Clicked; Remove Div if Confirmed  
   script.
@@ -60,7 +65,7 @@ block content
     $(".modal-trigger").click(function(){
       store = "#" + $(this).parent().closest('li').attr('id');
       id = $(this).parent().closest('li').find('span').text();
-      $('#check').openModal();
+      $(store[0] + store.slice(3)).openModal();
     });
     $("#confirm").click(function(){
       console.log(id);

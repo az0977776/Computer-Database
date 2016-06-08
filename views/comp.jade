@@ -2,7 +2,7 @@ extends layout
 
 block content
   div.container
-    h1 Comp #{name}
+    h1 Computer #{name}
     
     div.row
     form.col.s6.offset-s3(method="POST")
@@ -11,54 +11,79 @@ block content
           ul.collection.with-header
             li.collection-header.indigo.lighten-5
               big #{error}
+      
       div.row
-        div.input-field.col.s6
-          input(id='room',name="room" type="text" class="validate" value="#{room}")
-          label(for="room" class="active") Room
-          
-          
-      div.row
-        div.input-field.col.s6
+        div.input-field.col.s5
           input(name="compid" type="text" class="validate" value='#{compid}')
           label(for="compid" class="active") Computer ID
           
       div.row
-        div.input-field.col.s6
+        div.input-field.col.s5
+          input(id='room',name="room" type="text" class="validate" value="#{room}")
+          label(for="room" class="active") Room
+          
+      div.row
+        div.input-field.col.s5
           input(name="ipaddr" type="text" class="validate" value='#{ip}')
           label(for="ipaddr" class="active") IP Address
       
       div.row
-        div.input-field.col.s6
+        div.input-field.col.s5
           input(name="type" type="text" class="validate" value='#{type}')
           label(for="type" class="active") Brand
-      
-      div.row
-        div.input-field.col.s6
-          input(name="os" type="text" class="validate" value='#{os}')
-          label(for="os" class="active") Operating System
           
       div.row
-        div.input-field.col.s6
+        div.input-field.col.s5
           input(name="installdate" type="text" class="validate" value='#{install}')
           label(for="installdate" class="active") Installation Date
           
       div.row
-        div.input-field.col.s6
+        div.input-field.col.s5
           input(name="lastupdated" type="text" class="validate" value='#{updated}')
           label(for="lastupdated" class="active") Last Updated Date
       
       div.row
+        div.input-field.col.s12
+          input(name="os" type="text" class="validate" value='#{os}')
+          label(for="os" class="active") Operating System
+      
+      div.row
           div.input-field.col.s12
             select(name="working")
-              option(value="" disabled selected) Choose yes or no
-              option(value="Y") Yes
-              option(value="N") No
-            label Working
+              - var test = false;
+              - var zero = false;
+              - var one = false;
+              - var two = false;
+              - console.log("LEVEL:" + level);
+              - if (typeof level === undefined) test = true;
+              - console.log("TEST: " + test);
+              - if (typeof level !== undefined && level === 0) zero = true;
+              - if (typeof level !== undefined && level === 1) one = true;
+              - if (typeof level !== undefined && level === 2) two = true;
+              if test
+                option(value="" disabled selected) Choose an option (1 is minimal - 3 is severe)
+                option(value="0") Level 1
+                option(value="1") Level 2
+                option(value="2") Level 3
+              else
+                option(value="" disabled selected) Choose an option (1 is minimal - 3 is severe)
+                if zero
+                  option(value="0" selected) Level 1
+                else 
+                  option(value="0") Level 1
+                if one
+                  option(value="1" selected) Level 2
+                else
+                  option(value="1") Level 2
+                if two
+                  option(value="2" selected) Level 3
+                else
+                  option(value="2") Level 3
+            label Issue Level
       
       div.row
         div.input-field.col.s12
-          textarea.materialize-textarea(name="descript", value='#{descript}')
+          textarea.materialize-textarea(name="descript") #{descript}
           label(for="descript") Description
-      
       div.row
         button.btn.waves-effect.waves-light(type="submit" name="action") Update Computer

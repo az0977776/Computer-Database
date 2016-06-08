@@ -23,11 +23,10 @@ router.get('/:name', function(req, res, next) {
         prevYcor=data[0]['ycor'];
         prevType=data[0]['type'];
         prevInstallDate=data[0]['installation'];
-        prevOS=data[0]['os'];
+        prevOS=data[0]['OS'];
         prevLastupdated=data[0]['updated'];
         prevDescript=data[0]['description'];
-        prevWorking=data[0]['working'];
-        prevIssue=data[0]['issue'];
+        prevIssue=data[0]['issueLevel'];
 
         req.params["room"]=prevRoom;
         req.params["compid"]=prevCompid;
@@ -36,6 +35,7 @@ router.get('/:name', function(req, res, next) {
         req.params["os"]=prevOS;
         req.params["install"]=prevInstallDate;
         req.params["updated"]=prevLastupdated;
+        req.params["level"]=prevIssue;
         req.params["descript"]=prevDescript;
 
         
@@ -104,25 +104,44 @@ router.post('/:name', function(req, res, next) {
         res.render('comp', requestDictionary);
     }
     else if(working==undefined){
-        requestDictionary['error']="Error: Working Not Defined";
+        requestDictionary['error']="Error: Issue Level Not Defined";
         res.render('comp', requestDictionary);
     }
     else{
-        if(whiteSpaceCheck.test(type)){
-            type=prevType;
-        }
+        database.updateComp(room,compid,ipAddr,xcor,ycor,type,os,installDate,lastupdated,1,working,descript);
+
+        database.getComp(compid, function(data){
         
-        if(whiteSpaceCheck.test(os)){
-            os=prevOS;
-        }
-        
-        if(whiteSpaceCheck.test(descript)){
-            descript=prevDescript;
-        }
-        
+        prevRoom=data[0]["room"];
+        prevCompid=data[0]["computerID"];
+        prevIpAddr=data[0]["ip"];
+        prevXcor=data[0]['xcor'];
+        prevYcor=data[0]['ycor'];
+        prevType=data[0]['type'];
+        prevInstallDate=data[0]['installation'];
+        prevOS=data[0]['OS'];
+        prevLastupdated=data[0]['updated'];
+        prevDescript=data[0]['description'];
+        prevIssue=data[0]['issueLevel'];
+
+        requestDictionary["room"]=prevRoom;
+        requestDictionary["compid"]=prevCompid;
+        requestDictionary["ip"]=prevIpAddr;
+        requestDictionary["type"]=prevType;
+        requestDictionary["os"]=prevOS;
+        requestDictionary["install"]=prevInstallDate;
+        requestDictionary["updated"]=prevLastupdated;
+        requestDictionary["level"]=prevIssue;
+        requestDictionary["descript"]=prevDescript;
         requestDictionary['error']="Computer updated!";
-        database.updateComp(room,compid,ipAddr,xcor,ycor,type,os,installDate,lastupdated,working,issue,descript);
-        res.render("comp",requestDictionary);
+        
+        database.getComp(compid,function(data){
+            console.log(data,'hi');
+            res.render("comp",requestDictionary);
+        });
+
+    });
+    
     }
 });
 module.exports = router;
