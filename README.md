@@ -9,14 +9,7 @@ We were assigned with the task of designing a way to keep track of the status of
 ## Installation
 NodeJS must have been installed prior to installing this. [Download Node](https://nodejs.org/en/download/)
 
-Computer-Lab uses MySQL, and requires an user account for it.
-```sh
-mysql -u root -p
-CREATE USER 'computers'@'localhost' IDENTIFIED BY 'Uf7EZ262MtLDUmWc';
-GRANT ALL PRIVILEGES ON * . * TO 'computers'@'localhost';
-FLUSH PRIVILEGES;
-exit
-```
+Computer-Lab uses MySQL, and requires it to have been installed.
 
 Installing the Project Itself:
 ```sh
