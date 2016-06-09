@@ -11,14 +11,14 @@ NodeJS must have been installed prior to installing this. [Download Node](https:
 
 Computer-Lab uses MySQL, and requires it to have been installed. [LAMP Stack](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu).
 
+After ```make``` is run, PM2 will prompt the user to run a command as root. Copy and paste, and running the function exactly as it is. Finally, the server will now be running on port 3000. Use reverse proxy port forwarding to redirect traffic with either nginx/apache.
+
 Installing the Project Itself:
 ```sh
 git clone https://github.com/az0977776/Computer-Database.git ~/Computer-Database
 cd ~/Computer-Database
 make
 ```
-
-Finally, the server will now be running on port 3000. Use reverse proxy port forwarding to redirect traffic with either nginx/apache.
 
 ## What we did
 - Database for computer information, users, room notes

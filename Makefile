@@ -8,4 +8,3 @@ all:
 	sudo npm install pm2 -g
 	pm2 start bin/www
 	pm2 startup ubuntu
-	echo "COPY AND PASTE AND RUN THE COMMAND SHOWN IN PM2 IN THE LINE ABOVE"
