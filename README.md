@@ -9,14 +9,16 @@ We were assigned with the task of designing a way to keep track of the status of
 ## Installation
 NodeJS must have been installed prior to installing this. [Download Node](https://nodejs.org/en/download/)
 
-Computer-Lab uses MySQL, and requires it to have been installed.
+Computer-Lab uses MySQL, and requires it to have been installed. [LAMP Stack](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu).
 
 Installing the Project Itself:
 ```sh
-git clone https://github.com/az0977776/Computer-Database.git
-cd Computer-Database
+git clone https://github.com/az0977776/Computer-Database.git ~/Computer-Database
+cd ~/Computer-Database
 make
 ```
+
+Finally, the server will now be running on port 3000. Use reverse proxy port forwarding to redirect traffic with either nginx/apache.
 
 ## What we did
 - Database for computer information, users, room notes
