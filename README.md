@@ -21,22 +21,9 @@ make
 ```
 
 ## What we did
-- Database for computer information, users, room notes
-- CSS for website
-- Script to get information about computers in the labs
-- Grid of computers
-- List of computer issues
-
-## TODO
-- Note Taking System for Rooms (Darwin)
-- Add New Computers
-- Darwin: Export database
-- Darwin: Add function to get Issues by Room
-- Franklin: Preload SSH Issues
-
-## Installation Stuff
-- Darwin: Export Database
-- Young: Fully Test on Mac
+- SQL Database for computers, rooms, and users
+- NodeJS, Express, and Jade for front-end and middleware
+- Bash script to get information about computers in the labs using SSH
 
 ## Team Roles
 |Person         |Role           |
