@@ -40,7 +40,7 @@ router.get('/:name', function(req, res, next) {
         res.render('comp', requestDictionary);
     });
     
-    console.log(prevRoom);
+    //console.log(prevRoom);
     
 
     //var mysql      = require('mysql');
@@ -51,7 +51,7 @@ router.get('/:name', function(req, res, next) {
     //    database : 'labs'
     //});
     //connection.connect();
-    console.log(req.params,"po",prevRoom);
+    //console.log(req.params,"po",prevRoom);
 
 
     //connection.end();
@@ -122,7 +122,7 @@ router.post('/:name', function(req, res, next) {
         requestDictionary['error']="Computer updated!";
         
         database.getComp(compid,function(data){
-            console.log(data,'hi');
+            //console.log(data,'hi');
             res.render("comp",requestDictionary);
         });
 
