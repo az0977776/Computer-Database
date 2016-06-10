@@ -14,6 +14,7 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
 var issues = require('./routes/issues');
+var addcomp = require('./routes/addcomp');
 var computers = require('./routes/computers');
 var room = require('./routes/room');
 var comp = require('./routes/comp');
@@ -53,6 +54,7 @@ app.use('/computers', computers);
 app.use('/room', room);
 app.use('/comp', comp);
 app.use('/edit', edit);
+app.use('/addcomp', addcomp);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

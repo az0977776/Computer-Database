@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  div.container
+    h1 Add Computer
+    
+    div.row
+    form.col.s6.offset-s3(method="POST")
+      if error
+        div.container
+          ul.collection.with-header
+            li.collection-header.indigo.lighten-5
+              big #{error}
+      div.row
+        div.input-field.col.s5
+          input(id='id',name="id" type="text" class="validate")
+          label(for="id" class="active") Computer ID    
+      div.row
+        div.input-field.col.s5
+          input(id='room',name="room" type="text" class="validate")
+          label(for="room" class="active") Room
+          
+      div.row
+        div.input-field.col.s5
+          input(name="ipaddr" type="text" class="validate")
+          label(for="ipaddr" class="active") IP Address
+      
+      div.row
+        div.input-field.col.s5
+          input(name="type" type="text" class="validate")
+          label(for="type" class="active") Brand
+      
+      div.row
+        div.input-field.col.s5
+          input(name="xcor" type="text" class="validate")
+          label(for="xcor" class="active") X-Cor
+      
+      div.row
+        div.input-field.col.s5
+          input(name="ycor" type="text" class="validate")
+          label(for="ycor" class="active") Y-Cor
+          
+      div.row
+        div.input-field.col.s5
+          input(name="installdate" type="text" class="validate")
+          label(for="installdate" class="active") Installation Date
+          
+      div.row
+        div.input-field.col.s5
+          input(name="lastupdated" type="text" class="validate")
+          label(for="lastupdated" class="active") Last Updated Date
+      
+      div.row
+        div.input-field.col.s12
+          input(name="os" type="text" class="validate")
+          label(for="os" class="active") Operating System
+      
+      div.row
+          div.input-field.col.s12
+            select(name="working")
+                option(value="" disabled selected) Choose an option (1 is minimal - 3 is severe)
+                option(value="0") Level 1
+                option(value="1") Level 2
+                option(value="2") Level 3
+            label Issue Level
+      
+      div.row
+        div.input-field.col.s12
+          textarea.materialize-textarea(name="descript")
+          label(for="descript") Description
+      div.row
+        button.btn.waves-effect.waves-light(type="submit" name="action") Add Computer
