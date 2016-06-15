@@ -74,7 +74,6 @@ router.post('/:name', function(req, res, next) {
 
     var roomcheck = /[\d]/;
     var ipcheck = /[\d].[\d].[\d].[\d]/;
-    var datecheck = /[\d]+-[\d]+-[\d]+/;
     var whiteSpaceCheck= /\s*/;
 
     if(!roomcheck.test(room)){
@@ -83,14 +82,6 @@ router.post('/:name', function(req, res, next) {
     }
     else if(!ipcheck.test(ipAddr)){
         requestDictionary['error']="Error: IP Address not in correct format! e.g. 149.89.150.100";
-        res.render('comp', requestDictionary);
-    }
-    else if(!datecheck.test(installDate)&&installDate!='null'){
-        requestDictionary['error']="Error: Install Date format incorrect! e.g. 2009-10-31";
-        res.render('comp', requestDictionary);
-    }
-    else if(!datecheck.test(lastupdated)&&lastupdated!='null'){
-        requestDictionary['error']="Error: Update Date format incorrect! e.g. 2009-10-31";
         res.render('comp', requestDictionary);
     }
     else{

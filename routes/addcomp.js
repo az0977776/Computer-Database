@@ -8,7 +8,12 @@ requestDictionary = {};
 
 /* GET room page. */
 router.get('/', function(req, res, next) {
+    if(req.session.username){
   res.render('addcomp');
+    }
+    else{
+        res.redirect('login');
+    }
 });
 
 router.post('/', function(req, res, next) {
