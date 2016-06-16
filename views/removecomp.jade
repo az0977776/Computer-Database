@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div.container
+    h1 Remove Computer
+    
+    div.row
+    form.col.s6.offset-s3(method="POST")
+      if error
+        div.container
+          ul.collection.with-header
+            li.collection-header.indigo.lighten-5
+              big #{error}
+          
+      div.row
+        div.input-field.col.s5
+          input(id='id',name="id" type="text" class="validate")
+          label(for="id" class="active") Computer ID
+          
+      div.row
+        button.btn.waves-effect.waves-light(type="submit" name="action") Remove Computer
